@@ -18,5 +18,5 @@ pip install pylint
 pip install seaborn
 
 pip install autopep8
-pip install ipython
-
+# pip install ipython
+pip install jupyter-console
