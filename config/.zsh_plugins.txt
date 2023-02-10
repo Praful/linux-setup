@@ -1,0 +1,8 @@
+# .zsh_plugins.txt
+
+# popular fish-like plugins
+# mattmc3/zfunctions
+zsh-users/zsh-autosuggestions
+zdharma-continuum/fast-syntax-highlighting
+marlonrichert/zsh-autocomplete
+# zsh-users/zsh-history-substring-search

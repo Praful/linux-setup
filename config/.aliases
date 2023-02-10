@@ -1,0 +1,169 @@
+# PK aliases used by bash and zsh
+# for ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
+
+export PATH
+
+# History Options
+# ###############
+
+# Don't put duplicate lines in the history.
+export HISTCONTROL="ignoredups"
+
+# Ignore some controlling instructions
+export HISTIGNORE="[   ]*:&:bg:fg:exit"
+
+# Whenever displaying the prompt, write the previous line to disk
+# export PROMPT_COMMAND="history -a"
+#
+# will display only the current directory as the title - used for tabs in kitty
+# PROMPT_COMMAND='echo -ne "\033]0;$(basename ${PWD})\007"'
+# To see the last two directories inside the path
+
+export EDITOR="gvim --remote"
+export INPUTRC="~/.inputrc"
+# export LESS="--no-init --ignore-case --quit-if-one-screen --force --quit-on-intr"
+export LESS="--no-init --ignore-case --quit-if-one-screen --force --raw-control-chars"
+# export FZF_DEFAULT_COMMAND="rg --files --hidden . 2> nul"
+export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
+# export FZF_DEFAULT_COMMAND='find . '
+export FZF_DEFAULT_OPTS="--exact --ansi"
+
+export DATA='~/data'
+
+# coloured man pages using bat
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'
+  --header 'Press ctrl-/ to preview file'"
+
+# key ? to toggle small preview window to see the full command
+# key # to copy the command into clipboard using xsel
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind '?:toggle-preview'
+  --bind '#:execute-silent(echo -n {2..} | xsel --input)+abort'
+  --color header:italic
+  --header 'Press ? to see long command; # to copy command into clipboard'"
+
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+
+# Aliases
+# #######
+
+# Some example alias instructions
+# If these are enabled they will be used instead of any instructions
+# they may mask.  For example, alias rm='rm -i' will mask the rm
+# application.  To override the alias instruction use a \ before, ie
+# \rm will call the real rm not the alias.
+
+# Interactive operation...
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Default to human readable figures
+alias df='df -h'
+alias du='du -h'
+
+# Misc :)
+alias less='less -r'                          # raw control characters
+alias whence='type -a'                        # where, of a sort
+alias grep='grep --color'                     # show differences in colour
+
+# Some shortcuts for different directory listings
+alias ls='ls -hF --color=tty'                 # classify files in colour
+alias dir='ls --color=auto --format=vertical'
+alias vdir='ls --color=auto --format=long'
+alias ll='ls -l'                              # long list
+alias la='ls -A'                              # all but . and ..
+alias l='ls -CF'                              #
+
+# equivalents to mac clipboard copy/paste
+# these work on primary selection (see man xsel)
+# https://ostechnix.com/how-to-use-pbcopy-and-pbpaste-commands-on-linux/
+alias pbcopy='xsel --input'
+alias pbpaste='xsel --output'
+
+#PK ---------------------
+
+#alias ls='ls -G'
+alias g='grep -i -E'
+# alias t='less -i'
+alias t='bat'
+alias l='less -i'
+# alias m='less -i'
+alias d='ls -a'
+alias dl='ls -lrt -a'
+alias dv='dirs -v'
+alias ll='ls -alF'
+alias la='ls -A'
+alias u='cd ..'
+alias uu='cd ../..'
+alias uuu='cd ../../..'
+alias uuuu='cd ../../../..'
+
+#correct typo
+alias cd..='cd ..'
+
+alias cdd='cd ~/data'
+alias cdp='cd ~/data/dev/projects'
+alias cds='cd ~/data/scripts'
+alias cdw='cd ~/Downloads'
+
+# tar
+alias tarls="tar -tvf"
+alias untar="tar -xf"
+
+# find
+alias fd='find . -type d -iregex'
+alias ff='find . -type f -iregex'
+
+# disk usage
+alias biggest='du -s ./* | sort -nr | awk '\''{print $2}'\'' | xargs du -sh'
+alias dux='du -x --max-depth=1 | sort -n'
+alias dud='du -d 1 -h' #dir sizes
+alias dus='du -sh *' #summary
+
+#alias dl='ls -l'
+#alias ps='ps -Au | l'
+
+alias psa='ps -aef | l'
+alias psg='ps -aef |g'
+
+alias h='history'
+
+alias pu='pushd'
+alias po='popd'
+
+alias e='gvim --remote-silent'
+
+# edit and re-read this file
+alias be='$EDITOR ~/.bashrc ; source ~/.bashrc'
+alias ze='$EDITOR ~/.zshrc ; source ~/.zshrc'
+
+alias jc='jupyter console'
+alias jcq='jupyter qtconsole &'
+alias py='python3'
+alias ipy='ipython3'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+
+# git
+alias gits='git -c color.status=always status | less'
+alias gitls='git ls-files' #all files, including staged
+alias gitlsc='git ls-tree --full-tree -r --name-only HEAD' #committed files
+
+# echo things
+alias print-fpath='for fp in $fpath; do echo $fp; done; unset fp'
+alias print-path='echo $PATH | tr ":" "\n"'
+alias print-functions='print -l ${(k)functions[(I)[^_]*]} | sort'
+
