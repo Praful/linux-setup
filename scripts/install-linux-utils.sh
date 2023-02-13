@@ -1,5 +1,8 @@
 sudo apt update -y
+<<<<<<< HEAD
 sudo apt upgrade -y
+=======
+>>>>>>> origin/main
 
 sudo apt install -y nodejs
 # sudo apt install -y vim
