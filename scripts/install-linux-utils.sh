@@ -1,3 +1,6 @@
+sudo apt update -y
+sudo apt upgrade -y
+
 sudo apt install -y nodejs
 # sudo apt install -y vim
 # sudo apt install -y gvim
@@ -14,13 +17,19 @@ sudo apt install -y lua5.4
 sudo apt install -y python3-pip
 sudo apt install -y zsh
 sudo apt install -y meld
-sudo apt install -y kompare
+# sudo apt install -y kompare
 sudo apt install -y bat
 sudo apt install -y albert
 sudo apt install -y kitty
 sudo apt install -y xensors
 sudo apt install -y zoxide
 
+sudo apt install -y openvpn
+sudo apt install -y network-manager-openvpn
+sudo apt install -y network-manager-openvpn-gnome
+
+# to create focus_or_launch script for global shortcuts
+sudo apt-get install xdotool
 
 # npm install -g eslint
 # npm install -g nodemon
