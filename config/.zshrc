@@ -25,6 +25,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt nobeep
+setopt histignorespace #don't include commands starting with space in history file
 # Ref: https://linux.die.net/man/1/zshoptions
 setopt extendedglob nomatch notify autopushd pushdignoredups globcomplete nomenucomplete nocaseglob
 # setopt noautocd nobeep extendedglob nomatch notify noautolist noautomenu autopushd pushdignoredups

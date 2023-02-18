@@ -2,7 +2,11 @@
 
 # popular fish-like plugins
 # mattmc3/zfunctions
+#
+jeffreytse/zsh-vi-mode
 zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting
 marlonrichert/zsh-autocomplete
+dpretet/zsh-quotify
+# Aloxaf/fzf-tab
 # zsh-users/zsh-history-substring-search

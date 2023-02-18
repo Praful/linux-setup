@@ -1,6 +1,11 @@
 # PK aliases used by bash and zsh
 # for ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
 
+# see https://unix.stackexchange.com/questions/38172/are-all-bash-scripts-compatible-with-zsh
+# comment out since the emulate is inherited by other functions which won't work if 
+# they're not designed for sh
+# if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
+
 export PATH
 
 # History Options
@@ -76,6 +81,15 @@ alias less='less -r'                          # raw control characters
 alias whence='type -a'                        # where, of a sort
 alias grep='grep --color'                     # show differences in colour
 
+
+if [ -x "$(command -v exa)" ]; then
+  alias d='exa -ahF'
+  alias dl='exa -alhF'
+else
+  alias d='ls -a'
+  alias dl='ls -lrth -a'
+fi
+
 # Some shortcuts for different directory listings
 alias ls='ls -hF --color=tty'                 # classify files in colour
 alias dir='ls --color=auto --format=vertical'
@@ -83,7 +97,20 @@ alias vdir='ls --color=auto --format=long'
 alias ll='ls -l'                              # long list
 alias la='ls -A'                              # all but . and ..
 alias l='ls -CF'                              #
+alias dv='dirs -v'
+alias ll='ls -alF'
+alias la='ls -A'
 
+alias u='cd ..'
+alias uu='cd ../..'
+alias uuu='cd ../../..'
+alias uuuu='cd ../../../..'
+#correct typo
+alias cd..='cd ..'
+
+alias ai='sudo apt install'
+alias ar='sudo apt remove'
+#
 # equivalents to mac clipboard copy/paste
 # these work on primary selection (see man xsel)
 # https://ostechnix.com/how-to-use-pbcopy-and-pbpaste-commands-on-linux/
@@ -98,18 +125,6 @@ alias g='grep -i -E'
 alias t='bat'
 alias l='less -i'
 # alias m='less -i'
-alias d='ls -a'
-alias dl='ls -lrt -a'
-alias dv='dirs -v'
-alias ll='ls -alF'
-alias la='ls -A'
-alias u='cd ..'
-alias uu='cd ../..'
-alias uuu='cd ../../..'
-alias uuuu='cd ../../../..'
-
-#correct typo
-alias cd..='cd ..'
 
 alias cdd='cd ~/data'
 alias cdp='cd ~/data/dev/projects'
