@@ -13,9 +13,12 @@ export PATH
 
 # Don't put duplicate lines in the history.
 export HISTCONTROL="ignoredups"
+export HISTFILE=~/.histfile
+export HISTSIZE=1000
+export SAVEHIST=1000
 
 # Ignore some controlling instructions
-export HISTIGNORE="[   ]*:&:bg:fg:exit"
+export HISTIGNORE="[   ]*:&:bg:fg:exit:ls:[bf]g:reset:clear:cd:cd ..:cd.."
 
 # Whenever displaying the prompt, write the previous line to disk
 # export PROMPT_COMMAND="history -a"
@@ -25,6 +28,8 @@ export HISTIGNORE="[   ]*:&:bg:fg:exit"
 # To see the last two directories inside the path
 
 export EDITOR="gvim --remote"
+export VISUAL=$EDITOR
+
 export INPUTRC="~/.inputrc"
 # export LESS="--no-init --ignore-case --quit-if-one-screen --force --quit-on-intr"
 export LESS="--no-init --ignore-case --quit-if-one-screen --force --raw-control-chars"
@@ -67,14 +72,20 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 # application.  To override the alias instruction use a \ before, ie
 # \rm will call the real rm not the alias.
 
-# Interactive operation...
+# Play safe by performing these interactively 
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
+alias mkdir='mkdir -p'
+
 # Default to human readable figures
 alias df='df -h'
 alias du='du -h'
+alias df2='df --exclude-type=tmpfs --exclude-type=devtmpfs --exclude-type=squashfs'
+
+alias 'dus=du -msc * .*(N) | sort -n'
+alias 'dus.=du -msc .* | sort -n'
 
 # Misc :)
 alias less='less -r'                          # raw control characters
@@ -105,8 +116,10 @@ alias u='cd ..'
 alias uu='cd ../..'
 alias uuu='cd ../../..'
 alias uuuu='cd ../../../..'
+
 #correct typo
 alias cd..='cd ..'
+
 
 alias ai='sudo apt install'
 alias ar='sudo apt remove'
@@ -120,7 +133,7 @@ alias pbpaste='xsel --output'
 #PK ---------------------
 
 #alias ls='ls -G'
-alias g='grep -i -E'
+alias g='grep -i -E --colour --devices=skip --exclude-dir=.git'
 # alias t='less -i'
 alias t='bat'
 alias l='less -i'
@@ -173,9 +186,11 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 
 # git
+alias gs='git status' # (NB overriding GhostScript)
 alias gits='git -c color.status=always status | less'
 alias gitls='git ls-files' #all files, including staged
 alias gitlsc='git ls-tree --full-tree -r --name-only HEAD' #committed files
+alias gitlog='git log --graph --abbrev-commit --pretty=oneline --decorate'
 
 # echo things
 alias print-fpath='for fp in $fpath; do echo $fp; done; unset fp'

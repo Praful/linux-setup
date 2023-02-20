@@ -1,15 +1,36 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+# some settings copied from:
+# - https://matt.blissett.me.uk/linux/zsh/zshrc
+# - https://leahneukirchen.org/dotfiles/.zshrc
+
+# zsh specific aliases ============================================
+#
+# mkcd -- mkdir and cd at once
+mkcd() { mkdir -p -- "$1" && cd -- "$1" }
+compdef mkcd=mkdir
+
+# =================================================================
+
 
 
 export ZDOTDIR="$HOME/.config/zsh"
 
 # vim as editor
 bindkey -v
+# bindkey '^o' forward-char
+# bindkey '^w' forward-word
+# override vi plugin
 
-# Complete suggestion
-bindkey '^o' forward-char
-bindkey '^w' forward-word
+
+function zvm_after_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
+
+function zvm_after_lazy_keybindings() {
+  zvm_bindkey viins '^o' forward-char
+  zvm_bindkey viins '^w' forward-word
+}
 
 source ~/.aliases
 
@@ -20,20 +41,34 @@ source ~/.aliases
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
 
+
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+setopt inc_append_history
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt hist_verify
+setopt hist_ignore_space #don't include commands starting with space in history file
+
 setopt nobeep
-setopt histignorespace #don't include commands starting with space in history file
 # Ref: https://linux.die.net/man/1/zshoptions
 setopt extendedglob nomatch notify autopushd pushdignoredups globcomplete nomenucomplete nocaseglob
 # setopt noautocd nobeep extendedglob nomatch notify noautolist noautomenu autopushd pushdignoredups
 # setopt noautocd nobeep extendedglob nomatch notify autopushd pushdignoredups
 # setopt extendedglob nomatch notify autopushd pushdignoredups noautocd 
 
+
+# Prompts for confirmation after 'rm *' etc
+# Helps avoid mistakes like 'rm * o' when 'rm *.o' was intended
+setopt RM_STAR_WAIT
+
+# Background processes aren't killed on exit of shell
+setopt AUTO_CONTINUE
+
+# Don’t write over existing files with >, use >! instead
+setopt NOCLOBBER
 # Don't complete with first option: show menu instead to allow to tab through 
 # options.
+
 zstyle ':autocomplete:*' widget-style menu-complete
 
 # Fuzzy matching from:
@@ -73,4 +108,5 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
