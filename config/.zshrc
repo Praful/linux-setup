@@ -8,7 +8,7 @@
 #
 # mkcd -- mkdir and cd at once
 mkcd() { mkdir -p -- "$1" && cd -- "$1" }
-compdef mkcd=mkdir
+# compdef mkcd=mkdir
 
 # =================================================================
 
@@ -18,8 +18,8 @@ export ZDOTDIR="$HOME/.config/zsh"
 
 # vim as editor
 bindkey -v
-# bindkey '^o' forward-char
-# bindkey '^w' forward-word
+bindkey '^o' forward-char
+bindkey '^w' forward-word
 # override vi plugin
 
 

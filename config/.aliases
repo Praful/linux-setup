@@ -121,7 +121,7 @@ alias uuuu='cd ../../../..'
 alias cd..='cd ..'
 
 
-alias ai='sudo apt install'
+alias ai='sudo apt -y install'
 alias ar='sudo apt remove'
 #
 # equivalents to mac clipboard copy/paste
