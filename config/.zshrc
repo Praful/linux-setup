@@ -13,6 +13,10 @@ mkcd() { mkdir -p -- "$1" && cd -- "$1" }
 # =================================================================
 
 
+function zvm_config() {
+  # change default for new line (otherwise last setting is used)
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
 
 export ZDOTDIR="$HOME/.config/zsh"
 
@@ -99,7 +103,7 @@ eval "$(pyenv init -)"
 # Load pyenv-virtualenv automatically by adding the following to ~/.bashrc:
 eval "$(pyenv virtualenv-init -)"
 
-pyenv shell 3.11.1
+pyenv shell 3.11.2
 
 # set prompt for kitty tab title
 precmd () {print -Pn "\e]0;%~\a"}

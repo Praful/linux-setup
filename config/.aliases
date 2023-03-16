@@ -40,7 +40,7 @@ export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
 # export FZF_DEFAULT_COMMAND='find . '
 export FZF_DEFAULT_OPTS="--exact --ansi"
 
-export DATA='~/data'
+export DATA='/home/praful/data'
 
 # coloured man pages using bat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -175,6 +175,13 @@ alias e='gvim --remote-silent'
 alias be='$EDITOR ~/.bashrc ; source ~/.bashrc'
 alias ze='$EDITOR ~/.zshrc ; source ~/.zshrc'
 
+# the "python -m" ensures we're running the user default we've setup via pyenv
+# rather than the one referenced in the script via "#!/usr/bin/python3", which is 
+# the system default. This worked for 'jupyter console' but not 'jupyter qtconsole'. 
+# The solution is to edit ~/.local/share/jupyter/kernels/python3/kernel.json and 
+# change "python" to eg python3.11. This will work for ipython3, jupyter console and
+# jupyter qtconsole.
+# alias jc='python -m jupyter console'
 alias jc='jupyter console'
 alias jcq='jupyter qtconsole &'
 alias py='python3'
