@@ -81,7 +81,9 @@ alias mkdir='mkdir -p'
 
 # Default to human readable figures
 alias df='df -h'
-alias du='du -h'
+# unalias to compare sizes by running something like:
+#   du --max-depth=2 --exclude=data |gvim -
+# alias du='du -h'
 alias df2='df --exclude-type=tmpfs --exclude-type=devtmpfs --exclude-type=squashfs'
 
 alias 'dus=du -msc * .*(N) | sort -n'
@@ -194,6 +196,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # git
 alias gs='git status' # (NB overriding GhostScript)
+alias gsl='git status | l' # (NB overriding GhostScript)
 alias gits='git -c color.status=always status | less'
 alias gitls='git ls-files' #all files, including staged
 alias gitlsc='git ls-tree --full-tree -r --name-only HEAD' #committed files
