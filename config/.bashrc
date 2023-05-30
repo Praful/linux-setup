@@ -99,8 +99,8 @@ eval "$(oh-my-posh init bash --config ~/pk-posh-theme.omp.json)"
 if [ -f ~/.bash_custom ]; then
     . ~/.bash_custom
 fi
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
+if [ -f ~/.commonrc ]; then
+    . ~/.commonrc
 fi
 
 # enable programmable completion features (you don't need to enable

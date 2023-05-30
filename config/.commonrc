@@ -16,6 +16,7 @@ export HISTCONTROL="ignoredups"
 export HISTFILE=~/.histfile
 export HISTSIZE=1000
 export SAVEHIST=1000
+export RIPGREP_CONFIG_PATH=~/.config/.ripgrep
 
 # Ignore some controlling instructions
 export HISTIGNORE="[   ]*:&:bg:fg:exit:ls:[bf]g:reset:clear:cd:cd ..:cd.."
@@ -142,8 +143,12 @@ alias l='less -i'
 # alias m='less -i'
 
 alias cdd='cd ~/data'
+alias cdb='cd ~/data/blog'
+alias cdl='cd ~/data/logs'
+alias cdm='cd ~/data/mnt'
 alias cdp='cd ~/data/dev/projects'
 alias cds='cd ~/data/scripts'
+alias cdt='cd ~/data/settings'
 alias cdw='cd ~/Downloads'
 
 # tar
@@ -151,14 +156,17 @@ alias tarls="tar -tvf"
 alias untar="tar -xf"
 
 # find
-alias fd='find . -type d -iregex'
-alias ff='find . -type f -iregex'
+# used to be aliased to fd and ff but now fd is aliased to fdfind
+alias findd='find . -type d -iregex'
+alias findf='find . -type f -iregex'
 
 # disk usage
 alias biggest='du -s ./* | sort -nr | awk '\''{print $2}'\'' | xargs du -sh'
-alias dux='du -x --max-depth=1 | sort -n'
-alias dud='du -d 1 -h' #dir sizes
+alias dux='du -x --max-depth=1 2>/dev/null | sort -n'
+alias dud='du -d 1 -h 2>/dev/null' #dir sizes
 alias dus='du -sh *' #summary
+
+# also install duf for a prettier version of df
 
 #alias dl='ls -l'
 #alias ps='ps -Au | l'
@@ -184,6 +192,7 @@ alias ze='$EDITOR ~/.zshrc ; source ~/.zshrc'
 # change "python" to eg python3.11. This will work for ipython3, jupyter console and
 # jupyter qtconsole.
 # alias jc='python -m jupyter console'
+alias pip='python -m pip'
 alias jc='jupyter console'
 alias jcq='jupyter qtconsole &'
 alias py='python3'

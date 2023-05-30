@@ -3,6 +3,9 @@
 # some settings copied from:
 # - https://matt.blissett.me.uk/linux/zsh/zshrc
 # - https://leahneukirchen.org/dotfiles/.zshrc
+#
+# Skip all this for non-interactive shells
+[[ -z "$PS1" ]] && return
 
 # zsh specific aliases ============================================
 #
@@ -36,7 +39,7 @@ function zvm_after_lazy_keybindings() {
   zvm_bindkey viins '^w' forward-word
 }
 
-source ~/.aliases
+source ~/.commonrc
 
 # Clone antidote if necessary.
 [[ -e $ZDOTDIR/.antidote ]] ||
@@ -74,6 +77,13 @@ setopt NOCLOBBER
 # options.
 
 zstyle ':autocomplete:*' widget-style menu-complete
+
+# ============================== 
+# trying to addresses slow autocomplete on network drives
+# https://superuser.com/questions/585545/how-to-disable-zsh-tab-completion-for-nfs-dirs
+zstyle ':completion:*:*files' ignored-patterns '/mnt/*'
+zstyle ':completion:*:*directories' ignored-patterns '/mnt/*'
+# ============================== 
 
 # Fuzzy matching from:
 # https://superuser.com/questions/415650/does-a-fuzzy-matching-mode-exist-for-the-zsh-shell#:~:text=This%20is%20a%20mode%20where,TextMate
