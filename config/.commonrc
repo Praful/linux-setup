@@ -16,7 +16,7 @@ export HISTCONTROL="ignoredups"
 export HISTFILE=~/.histfile
 export HISTSIZE=1000
 export SAVEHIST=1000
-export RIPGREP_CONFIG_PATH=~/.config/.ripgrep
+export RIPGREP_CONFIG_PATH=~/.config/.ripgreprc
 
 # Ignore some controlling instructions
 export HISTIGNORE="[   ]*:&:bg:fg:exit:ls:[bf]g:reset:clear:cd:cd ..:cd.."
