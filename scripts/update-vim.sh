@@ -12,6 +12,6 @@ git stash pop
 cd src
 
 # clean previous build
-make distclean
+sudo make distclean
 sudo make
 sudo make install

@@ -6,7 +6,7 @@ sudo apt install -y make
 sudo apt install -y clang
 
 sudo apt install -y libpython3-dev
-sudo apt install -y lua5.4-dev
+sudo apt install -y liblua5.4-dev
 sudo apt install -y libperl-dev
 sudo apt install -y ruby-dev
 
