@@ -24,6 +24,7 @@ sudo apt install -y kitty
 sudo apt install -y xensors
 sudo apt install -y zoxide
 sudo apt install -y exa
+sudo apt install -y duf
 
 sudo apt install -y openvpn
 sudo apt install -y network-manager-openvpn
@@ -44,6 +45,9 @@ sudo apt install -y arp-scan
 sudo apt install -y okular
 
 sudo apt install -y wireshark
+sudo apt install -y gpick
+sudo apt install -y zeal
+sudo apt install -y showfoto
 
 
 # npm install -g eslint

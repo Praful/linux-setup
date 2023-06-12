@@ -87,11 +87,11 @@ source ~/.fzf/shell/key-bindings.bash
 eval "$(zoxide init bash)"
 
 # https://github.com/pyenv/pyenv#installation
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 # Load pyenv-virtualenv automatically by adding the following to ~/.bashrc:
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # export PS1='\u@\h \w> '
 # export PS1='\w> '
@@ -109,4 +109,4 @@ function cdl { cd $1; ls;}
 
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/pk-posh-theme.omp.json)"
 
-pyenv shell 3.11.1
+# pyenv shell 3.11.1

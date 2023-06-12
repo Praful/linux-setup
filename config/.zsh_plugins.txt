@@ -6,7 +6,8 @@
 jeffreytse/zsh-vi-mode
 zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting
-marlonrichert/zsh-autocomplete
+# marlonrichert/zsh-autocomplete
 dpretet/zsh-quotify
+
 # Aloxaf/fzf-tab
 # zsh-users/zsh-history-substring-search

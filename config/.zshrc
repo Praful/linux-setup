@@ -7,14 +7,42 @@
 # Skip all this for non-interactive shells
 [[ -z "$PS1" ]] && return
 
+autoload -Uz compinit && compinit
+
 # zsh specific aliases ============================================
 #
 # mkcd -- mkdir and cd at once
 mkcd() { mkdir -p -- "$1" && cd -- "$1" }
 # compdef mkcd=mkdir
 
+# zsh specific aliases ============================================
+
+# run-help=========================================================
+# https://postgresqlstan.github.io/cli/zsh-run-help/
+#run-help
+autoload -Uz run-help
+# add other help
+autoload run−help−git
+autoload run−help−ip
+autoload run−help−openssl
+autoload run−help−p4
+autoload run−help−sudo
+alias help=run-help
+
+# press alt-h vim insert mode to get help for command
+# does not work
+# bindkey '\M-H' run-help
+# bindkey -v '^b' run-help
 # =================================================================
 
+# case insensitive completions
+
+# init vi plugin straight away (not lazily)
+ZVM_INIT_MODE=sourcing
+
+# uncomment next two lines to print last error code
+# print_last_status() print -u2 Exit status: $?
+# precmd_functions+=(print_last_status)
 
 function zvm_config() {
   # change default for new line (otherwise last setting is used)
@@ -23,20 +51,11 @@ function zvm_config() {
 
 export ZDOTDIR="$HOME/.config/zsh"
 
-# vim as editor
-bindkey -v
-bindkey '^o' forward-char
-bindkey '^w' forward-word
-# override vi plugin
-
+# for run-help
+export HELPDIR=/usr/share/zsh/help
 
 function zvm_after_init() {
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-}
-
-function zvm_after_lazy_keybindings() {
-  zvm_bindkey viins '^o' forward-char
-  zvm_bindkey viins '^w' forward-word
 }
 
 source ~/.commonrc
@@ -48,21 +67,16 @@ source ~/.commonrc
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
 
-
 # Lines configured by zsh-newuser-install
 setopt inc_append_history
 setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 setopt hist_verify
 setopt hist_ignore_space #don't include commands starting with space in history file
-
 setopt nobeep
+
 # Ref: https://linux.die.net/man/1/zshoptions
 setopt extendedglob nomatch notify autopushd pushdignoredups globcomplete nomenucomplete nocaseglob
-# setopt noautocd nobeep extendedglob nomatch notify noautolist noautomenu autopushd pushdignoredups
-# setopt noautocd nobeep extendedglob nomatch notify autopushd pushdignoredups
-# setopt extendedglob nomatch notify autopushd pushdignoredups noautocd 
-
 
 # Prompts for confirmation after 'rm *' etc
 # Helps avoid mistakes like 'rm * o' when 'rm *.o' was intended
@@ -77,12 +91,13 @@ setopt NOCLOBBER
 # options.
 
 zstyle ':autocomplete:*' widget-style menu-complete
+# zstyle ':autocomplete:*' widget-style menu-select
 
 # ============================== 
 # trying to addresses slow autocomplete on network drives
 # https://superuser.com/questions/585545/how-to-disable-zsh-tab-completion-for-nfs-dirs
-zstyle ':completion:*:*files' ignored-patterns '/mnt/*'
-zstyle ':completion:*:*directories' ignored-patterns '/mnt/*'
+# zstyle ':completion:*:*files' ignored-patterns '/mnt/*'
+# zstyle ':completion:*:*directories' ignored-patterns '/mnt/*'
 # ============================== 
 
 # Fuzzy matching from:
@@ -91,10 +106,12 @@ zstyle ':completion:*:*directories' ignored-patterns '/mnt/*'
 # 1 -- smart case completion (abc => Abc)
 # 2 -- word flex completion (abc => A-big-Car)
 # 3 -- full flex completion (abc => ABraCadabra)
-zstyle ':completion:*' matcher-list '' \
-  'm:{a-z\-}={A-Z\_}' \
-  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-  'r:|?=** m:{a-z\-}={A-Z\_}'
+# zstyle ':completion:*' matcher-list '' \
+  # 'm:{a-z\-}={A-Z\_}' \
+  # 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  # 'r:|?=** m:{a-z\-}={A-Z\_}'
+# case insensitve
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 source ~/.fzf/shell/completion.zsh
 source ~/.fzf/shell/key-bindings.zsh
@@ -106,21 +123,11 @@ fast-theme -q forest
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
 
-# https://github.com/pyenv/pyenv#installation
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-# Load pyenv-virtualenv automatically by adding the following to ~/.bashrc:
-eval "$(pyenv virtualenv-init -)"
-
-pyenv shell 3.11.2
-
 # set prompt for kitty tab title
 precmd () {print -Pn "\e]0;%~\a"}
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-
+bindkey '^o' forward-char
+bindkey '^w' forward-word
+bindkey '^X0' run-help
+bindkey '^X9' _complete_help
+# bindkey > /tmp/bindkey-debug-$$
