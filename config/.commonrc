@@ -40,7 +40,11 @@ export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
 # export FZF_DEFAULT_COMMAND='find . '
 # export FZF_DEFAULT_OPTS="--exact --ansi"
-export FZF_DEFAULT_OPTS="--ansi"
+# don't show left gutter and highlight line in blue instead of showing arrow in gutter
+# export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,gutter:-1 --color=hl:#A6E22E"
+export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
+# export FZF_DEFAULT_OPTS="--preview 'bat {}' --preview-window hidden:wrap -m --bind=ctrl-v:toggle-preview,ctrl-i:toggle-down,ctrl-a:toggle-all --ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
+# export FZF_DEFAULT_OPTS="--preview 'bat {}' --preview-window hidden:wrap -m --bind=ctrl-o:toggle-preview,ctrl-i:toggle-down,ctrl-a:toggle-all --ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
 
 export DATA='/home/praful/data'
 

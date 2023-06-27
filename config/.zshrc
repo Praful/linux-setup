@@ -49,6 +49,14 @@ function zvm_config() {
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 }
 
+# export LS_COLORS=$LS_COLORS:'di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;31:bd=30;46:cd=30;46:su=30'
+export LS_COLORS="${LS_COLORS};41:sg=30;41:tw=30;41:ow=30;41:*.rpm=1;31:*.deb=1;31"
+export LSCOLORS=CxahafafBxagagabababab
+
+
+
+export GREP_COLORS LS_COLORS LSCOLORS
 export ZDOTDIR="$HOME/.config/zsh"
 
 # for run-help
@@ -66,6 +74,7 @@ source ~/.commonrc
 
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
+
 
 # Lines configured by zsh-newuser-install
 setopt inc_append_history
@@ -90,8 +99,32 @@ setopt NOCLOBBER
 # Don't complete with first option: show menu instead to allow to tab through 
 # options.
 
-zstyle ':autocomplete:*' widget-style menu-complete
+
+# zstyle ':autocomplete:*' widget-style menu-complete
 # zstyle ':autocomplete:*' widget-style menu-select
+
+# --------------------------
+# fzf-tab from https://github.com/Aloxaf/fzf-tab
+#
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# repeat FZF_DEFAULT_OPTS here since they're not picked up
+zstyle ':fzf-tab:complete:*' fzf-flags --ansi --color=bg+:\#005FFF,hl:\#95FFA4,gutter:-1
+# zstyle ':fzf-tab:complete:*' fzf-flags --color=bg\+:#005FFF
+
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+# typing / <tab> keeps completing path; useful for cd into deep paths
+zstyle ':fzf-tab:*' continuous-trigger '/'
+
+# --------------------------
 
 # ============================== 
 # trying to addresses slow autocomplete on network drives
@@ -128,6 +161,8 @@ precmd () {print -Pn "\e]0;%~\a"}
 
 bindkey '^o' forward-char
 bindkey '^w' forward-word
-bindkey '^X0' run-help
+bindkey '^Xh' run-help
 bindkey '^X9' _complete_help
 # bindkey > /tmp/bindkey-debug-$$
+#
+enable-fzf-tab

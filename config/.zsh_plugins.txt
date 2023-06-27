@@ -8,6 +8,5 @@ zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting
 # marlonrichert/zsh-autocomplete
 dpretet/zsh-quotify
-
-# Aloxaf/fzf-tab
+Aloxaf/fzf-tab
 # zsh-users/zsh-history-substring-search
