@@ -49,6 +49,15 @@ sudo apt install -y gpick
 sudo apt install -y zeal
 sudo apt install -y showfoto
 
+sudo apt install -y imagemagick
+sudo apt install -y ffmpeg
+sudo apt install -y paper-icon-theme
+
+#android connectivity
+sudo apt install -y kdeconnect 
+
+flatpak override --user --filesystem="~/data/docs/bottles" com.usebottles.bottles
+flatpak install com.github.tchx84.Flatseal
 
 # npm install -g eslint
 # npm install -g nodemon

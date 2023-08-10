@@ -3,6 +3,7 @@
 # some settings copied from:
 # - https://matt.blissett.me.uk/linux/zsh/zshrc
 # - https://leahneukirchen.org/dotfiles/.zshrc
+# - https://askubuntu.com/questions/1577/moving-from-bash-to-zsh
 #
 # Skip all this for non-interactive shells
 [[ -z "$PS1" ]] && return
@@ -35,18 +36,28 @@ alias help=run-help
 # bindkey -v '^b' run-help
 # =================================================================
 
-# case insensitive completions
-
-# init vi plugin straight away (not lazily)
-ZVM_INIT_MODE=sourcing
-
-# uncomment next two lines to print last error code
+# uncomment next two lines to print last error code 
 # print_last_status() print -u2 Exit status: $?
 # precmd_functions+=(print_last_status)
 
+# init vi plugin straight away (not lazily) to avoid it clashing with other plugins
+ZVM_INIT_MODE=sourcing
+
+# ZVM_TERM=xterm-256color
+
 function zvm_config() {
-  # change default for new line (otherwise last setting is used)
+
+  # change default in vi plugin for new line (otherwise last setting is used)
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+
+  # Retrieve default cursor styles
+  # local ncur=$(zvm_cursor_style $ZVM_NORMAL_MODE_CURSOR)
+  # local icur=$(zvm_cursor_style $ZVM_INSERT_MODE_CURSOR)
+
+  # Append your custom color for your cursor
+  # ZVM_INSERT_MODE_CURSOR=$icur'\e\e]12;red\a'
+  # ZVM_INSERT_MODE_CURSOR=$icur'\e\e]12;#108800\a'
+  # ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#008800\a'
 }
 
 # export LS_COLORS=$LS_COLORS:'di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
@@ -54,14 +65,14 @@ export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;31:bd=30;46:cd=30;46
 export LS_COLORS="${LS_COLORS};41:sg=30;41:tw=30;41:ow=30;41:*.rpm=1;31:*.deb=1;31"
 export LSCOLORS=CxahafafBxagagabababab
 
-
-
 export GREP_COLORS LS_COLORS LSCOLORS
 export ZDOTDIR="$HOME/.config/zsh"
 
-# for run-help
+# for run-help (key C^X-H)
 export HELPDIR=/usr/share/zsh/help
 
+
+# called by zsh-vi-mode plugin
 function zvm_after_init() {
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
@@ -75,7 +86,9 @@ source ~/.commonrc
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
 
-
+# meaning of setopt options
+# https://zsh.sourceforge.io/Doc/Release/Options.html#Description-of-Options
+#
 # Lines configured by zsh-newuser-install
 setopt inc_append_history
 setopt hist_ignore_all_dups
@@ -83,6 +96,11 @@ setopt hist_reduce_blanks
 setopt hist_verify
 setopt hist_ignore_space #don't include commands starting with space in history file
 setopt nobeep
+
+# one history for all open shells
+setopt sharehistory
+# add more info eg timestamp and elapsed time since command
+setopt extendedhistory
 
 # Ref: https://linux.die.net/man/1/zshoptions
 setopt extendedglob nomatch notify autopushd pushdignoredups globcomplete nomenucomplete nocaseglob
@@ -96,10 +114,9 @@ setopt AUTO_CONTINUE
 
 # Don’t write over existing files with >, use >! instead
 setopt NOCLOBBER
+
 # Don't complete with first option: show menu instead to allow to tab through 
 # options.
-
-
 # zstyle ':autocomplete:*' widget-style menu-complete
 # zstyle ':autocomplete:*' widget-style menu-select
 
@@ -124,8 +141,17 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 # typing / <tab> keeps completing path; useful for cd into deep paths
 zstyle ':fzf-tab:*' continuous-trigger '/'
 
+# <space> accepts item from completion list 
+zstyle ':fzf-tab:*' fzf-bindings 'space:accept'
+# <enter> accepts answer and presses <enter> for line
+zstyle ':fzf-tab:*' accept-line enter
 # --------------------------
-
+# zsh-autosuggestions plugins
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# --------------------------
+#
+#
+#
 # ============================== 
 # trying to addresses slow autocomplete on network drives
 # https://superuser.com/questions/585545/how-to-disable-zsh-tab-completion-for-nfs-dirs
@@ -159,8 +185,10 @@ eval "$(zoxide init zsh)"
 # set prompt for kitty tab title
 precmd () {print -Pn "\e]0;%~\a"}
 
+# for zsh-autosuggestions
 bindkey '^o' forward-char
 bindkey '^w' forward-word
+
 bindkey '^Xh' run-help
 bindkey '^X9' _complete_help
 # bindkey > /tmp/bindkey-debug-$$

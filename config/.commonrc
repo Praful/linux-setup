@@ -6,7 +6,7 @@
 # they're not designed for sh
 # if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
 
-export PATH
+export PATH=$PATH:~/data/scripts
 
 # History Options
 # ###############
@@ -19,7 +19,7 @@ export SAVEHIST=1000
 export RIPGREP_CONFIG_PATH=~/.config/.ripgreprc
 
 # Ignore some controlling instructions
-export HISTIGNORE="[   ]*:&:bg:fg:exit:ls:[bf]g:reset:clear:cd:cd ..:cd.."
+export HISTIGNORE="[   ]*:&:bg:fg:exit:ls:[bf]g:reset:clear:cd:cd ..:cd..:u:uu:uuu"
 
 # Whenever displaying the prompt, write the previous line to disk
 # export PROMPT_COMMAND="history -a"
@@ -35,16 +35,15 @@ export INPUTRC="~/.inputrc"
 # export LESS="--no-init --ignore-case --quit-if-one-screen --force --quit-on-intr"
 export LESS="--no-init --ignore-case --quit-if-one-screen --force --raw-control-chars"
 # export FZF_DEFAULT_COMMAND="rg --files --hidden . 2> nul"
-export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
+# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_CTRL_T_COMMAND='fd'
+export FZF_ALT_C_COMMAND='fd --type d'
 # export FZF_DEFAULT_COMMAND='find . '
 # export FZF_DEFAULT_OPTS="--exact --ansi"
 # don't show left gutter and highlight line in blue instead of showing arrow in gutter
 # export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,gutter:-1 --color=hl:#A6E22E"
 export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
-# export FZF_DEFAULT_OPTS="--preview 'bat {}' --preview-window hidden:wrap -m --bind=ctrl-v:toggle-preview,ctrl-i:toggle-down,ctrl-a:toggle-all --ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
-# export FZF_DEFAULT_OPTS="--preview 'bat {}' --preview-window hidden:wrap -m --bind=ctrl-o:toggle-preview,ctrl-i:toggle-down,ctrl-a:toggle-all --ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
 
 export DATA='/home/praful/data'
 

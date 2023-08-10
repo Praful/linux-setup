@@ -1,4 +1,6 @@
-cd ~/data/dev/open-source/vim
+#!/usr/bin/env bash
+#
+cd /home/praful/data/dev/open-source/vim
 
 # stash changes, usually just makefile
 git stash
