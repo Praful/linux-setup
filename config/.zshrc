@@ -12,9 +12,10 @@ autoload -Uz compinit && compinit
 
 # zsh specific aliases ============================================
 #
-# mkcd -- mkdir and cd at once
-mkcd() { mkdir -p -- "$1" && cd -- "$1" }
-# compdef mkcd=mkdir
+# md -- mkdir and cd at once
+md() { mkdir -p -- "$1" && cd -- "$1" }
+compdef md=mkdir
+# alias md='mkdir -p'
 
 # zsh specific aliases ============================================
 
@@ -60,8 +61,8 @@ function zvm_config() {
   # ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#008800\a'
 }
 
-# export LS_COLORS=$LS_COLORS:'di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
-export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;31:bd=30;46:cd=30;46:su=30'
+# For help, see https://linuxhint.com/ls_colors_bash/
+export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;36:bd=30;46:cd=30;46:su=30'
 export LS_COLORS="${LS_COLORS};41:sg=30;41:tw=30;41:ow=30;41:*.rpm=1;31:*.deb=1;31"
 export LSCOLORS=CxahafafBxagagabababab
 
@@ -89,7 +90,8 @@ antidote load
 # meaning of setopt options
 # https://zsh.sourceforge.io/Doc/Release/Options.html#Description-of-Options
 #
-# Lines configured by zsh-newuser-install
+# Zsh settings for history
+export HISTORY_IGNORE="(d|dl|ls|[bf]g|exit|reset|clear|env|u|uu|uuu|cd|cd ..|cd..)"
 setopt inc_append_history
 setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
@@ -189,8 +191,8 @@ precmd () {print -Pn "\e]0;%~\a"}
 bindkey '^o' forward-char
 bindkey '^w' forward-word
 
-bindkey '^Xh' run-help
-bindkey '^X9' _complete_help
+bindkey '^X0' run-help
+# bindkey '^X9' _complete_help
 # bindkey > /tmp/bindkey-debug-$$
 #
 enable-fzf-tab

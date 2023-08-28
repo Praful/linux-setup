@@ -62,3 +62,9 @@ flatpak install com.github.tchx84.Flatseal
 # npm install -g eslint
 # npm install -g nodemon
 # npm install -g concurrently
+
+sudo add-apt-repository ppa:hluk/copyq
+sudo apt update
+sudo apt install -y copyq
+
+sudo apt install -y ocrmypdf

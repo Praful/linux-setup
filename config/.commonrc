@@ -14,8 +14,8 @@ export PATH=$PATH:~/data/scripts
 # Don't put duplicate lines in the history.
 export HISTCONTROL="ignoredups"
 export HISTFILE=~/.histfile
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=25000
+export SAVEHIST=9000
 export RIPGREP_CONFIG_PATH=~/.config/.ripgreprc
 
 # Ignore some controlling instructions
@@ -30,6 +30,7 @@ export HISTIGNORE="[   ]*:&:bg:fg:exit:ls:[bf]g:reset:clear:cd:cd ..:cd..:u:uu:u
 
 export EDITOR="gvim --remote"
 export VISUAL=$EDITOR
+export PAGER="less"
 
 export INPUTRC="~/.inputrc"
 # export LESS="--no-init --ignore-case --quit-if-one-screen --force --quit-on-intr"
@@ -46,6 +47,7 @@ export FZF_ALT_C_COMMAND='fd --type d'
 export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
 
 export DATA='/home/praful/data'
+
 
 # coloured man pages using bat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -161,8 +163,9 @@ alias untar="tar -xf"
 
 # find
 # used to be aliased to fd and ff but now fd is aliased to fdfind
-alias findd='find . -type d -iregex'
-alias findf='find . -type f -iregex'
+# alias findd='find . -type d -iregex'
+# alias findf='find . -type f -iregex'
+alias fd='fdfind --hidden --exclude "**/mnt/**"'
 
 # disk usage
 alias biggest='du -s ./* | sort -nr | awk '\''{print $2}'\'' | xargs du -sh'
