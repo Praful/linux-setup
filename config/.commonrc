@@ -5,7 +5,28 @@
 # comment out since the emulate is inherited by other functions which won't work if 
 # they're not designed for sh
 # if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
+#
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+fe() {
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  # [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+  # hardcode vim since if EDITOR is gvim --remote it doesn't work
+  [[ -n "$files" ]] && gvim --remote "${files[@]}"
+}
 
+# Modified version where you can press
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+fo() {
+  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
 export PATH=$PATH:~/data/scripts
 
 # History Options
@@ -37,9 +58,9 @@ export INPUTRC="~/.inputrc"
 export LESS="--no-init --ignore-case --quit-if-one-screen --force --raw-control-chars"
 # export FZF_DEFAULT_COMMAND="rg --files --hidden . 2> nul"
 # export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden'
 export FZF_CTRL_T_COMMAND='fd'
-export FZF_ALT_C_COMMAND='fd --type d'
+export FZF_ALT_C_COMMAND='fd --type d --hidden'
 # export FZF_DEFAULT_COMMAND='find . '
 # export FZF_DEFAULT_OPTS="--exact --ansi"
 # don't show left gutter and highlight line in blue instead of showing arrow in gutter
