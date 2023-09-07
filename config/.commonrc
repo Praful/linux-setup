@@ -152,9 +152,11 @@ alias cdd='cd $DATA'
 alias cdb='cd $DATA/blog'
 alias cdl='cd $DATA/logs'
 alias cdm='cd $DATA/mnt'
+alias cdo='cd $DATA/dev/open-source'
 alias cdp='cd $DATA/dev/projects'
 alias cds='cd $DATA/scripts'
-alias cdt='cd $DATA/settings'
+alias cdss='cd $DATA/settings'
+alias cdt='cd $DATA/temp'
 alias cdw='cd ~/Downloads'
 
 # tar
