@@ -10,10 +10,15 @@
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
 # works in zsh, bash works with 'read -ra'
-fe() {
+fe1() {
  IFS=' ' read -rA editor <<< "${EDITOR:-vim}"
  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
  [[ -n "$files" ]] && "${editor[@]}" "${files[@]}"
+}
+
+fe() {
+  fzf-tmux --query "$1" --multi --select-1 --exit-0 \
+    --bind "enter:become:$(eval echo "${EDITOR:-vim}") {+}"
 }
 
 # Modified version where you can press
@@ -28,7 +33,7 @@ fo() {
     [ "$key" = ctrl-o ] && open "$file" || ${editor[@]} "$file"
   fi
 }
-export PATH=$PATH:~/data/scripts
+export PATH=$PATH:~/data/scripts/linux
 
 # History Options
 # ###############
