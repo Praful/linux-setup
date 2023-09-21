@@ -6,33 +6,14 @@
 # they're not designed for sh
 # if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
 #
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
-#   - Bypass fuzzy finder if there's only one match (--select-1)
-#   - Exit if there's no match (--exit-0)
-# works in zsh, bash works with 'read -ra'
-fe1() {
- IFS=' ' read -rA editor <<< "${EDITOR:-vim}"
- IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
- [[ -n "$files" ]] && "${editor[@]}" "${files[@]}"
-}
 
-fe() {
+# edit (default) or open (ctrl-o) file
+f() {
   fzf-tmux --query "$1" --multi --select-1 --exit-0 \
-    --bind "enter:become:$(eval echo "${EDITOR:-vim}") {+}"
+    --bind "enter:become:$(eval echo "${EDITOR:-vim}") {+}" \
+    --bind "ctrl-o:become:open {+}"
 }
 
-# Modified version where you can press
-#   - CTRL-O to open with `open` command,
-#   - CTRL-E or Enter key to open with the $EDITOR
-fo() {
-  IFS=' ' read -rA editor <<< "${EDITOR:-vim}"
-  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
-  key=$(head -1 <<< "$out")
-  file=$(head -2 <<< "$out" | tail -1)
-  if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || ${editor[@]} "$file"
-  fi
-}
 export PATH=$PATH:~/data/scripts/linux
 
 # History Options
@@ -178,9 +159,11 @@ alias l='less -i'
 alias cdd='cd $DATA'
 alias cdb='cd $DATA/blog'
 alias cdl='cd $DATA/logs'
-alias cdm='cd $DATA/mnt'
+alias cdm='cd /mnt'
 alias cdo='cd $DATA/dev/open-source'
 alias cdp='cd $DATA/dev/projects'
+alias cdpl='cd $DATA/dev/projects/linux-setup'
+alias cdpv='cd $DATA/dev/projects/vim-config'
 alias cds='cd $DATA/scripts'
 alias cdss='cd $DATA/settings'
 alias cdt='cd $DATA/temp'
