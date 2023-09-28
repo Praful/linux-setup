@@ -6,4 +6,5 @@
 
 # update
 cd ~/.fzf && git pull && ./install --all
-sudo cp --verbose ~/.fzf/bin/* /usr/bin/
+sudo cp --verbose ~/.fzf/bin/fzf /usr/bin/
+sudo cp --verbose ~/.fzf/bin/fzf-tmux /usr/bin/
