@@ -17,6 +17,22 @@ md() { mkdir -p -- "$1" && cd -- "$1" }
 compdef md=mkdir
 # alias md='mkdir -p'
 
+# Allows C-Z to suspend current command
+# Pressing C-Z twice will suspend currently running command 
+fancy-ctrl-z () {
+  emulate -LR zsh
+  if [[ $#BUFFER -eq 0 ]]; then
+    bg
+    zle redisplay
+  else
+    zle push-input
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z'          fancy-ctrl-z
+
+
+
 # zsh specific aliases ============================================
 
 # run-help=========================================================
@@ -29,7 +45,7 @@ autoload run−help−ip
 autoload run−help−openssl
 autoload run−help−p4
 autoload run−help−sudo
-alias help=run-help
+alias hp=run-help
 
 # press alt-h vim insert mode to get help for command
 # does not work
@@ -98,6 +114,7 @@ setopt hist_reduce_blanks
 setopt hist_verify
 setopt hist_ignore_space #don't include commands starting with space in history file
 setopt nobeep
+setopt correct_all
 
 # one history for all open shells
 setopt sharehistory
@@ -196,3 +213,5 @@ bindkey '^X0' run-help
 # bindkey > /tmp/bindkey-debug-$$
 #
 enable-fzf-tab
+
+[ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh

@@ -8,11 +8,20 @@
 #
 
 # edit (default) or open (ctrl-o) file
-f() {
+function f() {
   fzf-tmux --query "$1" --multi --select-1 --exit-0 \
     --bind "enter:become:$(eval echo "${EDITOR:-vim}") {+}" \
     --bind "ctrl-o:become:open {+}"
 }
+
+# in your .bashrc/.zshrc/*rc
+# allows "help cat" instead of "cat --help"
+alias bathelp='bat --plain --language=cmd-help'
+# alias bathelp='bat --plain --language=help'
+function h() {
+    "$@" --help 2>&1 | bathelp
+}
+
 
 export PATH=$PATH:~/data/scripts/linux
 
@@ -194,7 +203,7 @@ alias dus='du -sh *' #summary
 alias psa='ps -aef | l'
 alias psg='ps -aef | rg'
 
-alias h='history'
+# alias h='history'
 
 alias pu='pushd'
 alias po='popd'
