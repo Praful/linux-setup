@@ -7,6 +7,7 @@
 # if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
 #
 
+# f [fuzzy pattern]
 # edit (default) or open (ctrl-o) file
 function f() {
   fzf-tmux --query "$1" --multi --select-1 --exit-0 \

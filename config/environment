@@ -1,3 +1,3 @@
-PATH="/home/praful/.nvm/versions/node/v19.5.0/bin:/usr/local/sbin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
-EDITOR="gvim --remote"
+PATH="/home/praful/.nvm/versions/node/v20.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 DATA="/home/praful/data"
+EDITOR="gvim --remote"
