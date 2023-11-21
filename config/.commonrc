@@ -241,6 +241,13 @@ alias gitls='git ls-files' #all files, including staged
 alias gitlsc='git ls-tree --full-tree -r --name-only HEAD' #committed files
 alias gitlog='git log --graph --abbrev-commit --pretty=oneline --decorate'
 
+# for data dir (on another drive)that is mounted at ~/data, if we are in ~/data,
+# gitls won't look across file systems since ~/data is on one drive and ~/ is on 
+# another drive. This fixes issue:
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+# uncomment for diagnostic output
+# export GIT_TRACE=1
+
 # echo things
 alias print-fpath='for fp in $fpath; do echo $fp; done; unset fp'
 alias print-path='echo $PATH | tr ":" "\n"'
