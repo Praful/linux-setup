@@ -14,7 +14,6 @@ function f() {
     --bind "enter:become:$(eval echo "${EDITOR:-vim}") {+}" \
     --bind "ctrl-o:become:open {+}"
 }
-
 # in your .bashrc/.zshrc/*rc
 # allows "help cat" instead of "cat --help"
 alias bathelp='bat --plain --language=cmd-help'
@@ -22,7 +21,6 @@ alias bathelp='bat --plain --language=cmd-help'
 function h() {
     "$@" --help 2>&1 | bathelp
 }
-
 
 export PATH=$PATH:~/data/scripts/linux
 
