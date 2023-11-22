@@ -22,6 +22,11 @@ function h() {
     "$@" --help 2>&1 | bathelp
 }
 
+# start comparison as background so that terminal doesn't wait for process to end
+function b() {
+    bcompare "$@" &
+}
+
 export PATH=$PATH:~/data/scripts/linux
 
 # History Options
@@ -163,7 +168,6 @@ alias g='grep -i -E --colour --devices=skip --exclude-dir=.git'
 # alias t='less -i'
 alias t='bat'
 alias l='less -i'
-# alias m='less -i'
 
 alias cdd='cd $DATA'
 alias cdb='cd $DATA/blog'

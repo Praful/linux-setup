@@ -4,6 +4,8 @@
 # - https://matt.blissett.me.uk/linux/zsh/zshrc
 # - https://leahneukirchen.org/dotfiles/.zshrc
 # - https://askubuntu.com/questions/1577/moving-from-bash-to-zsh
+# - https://grml.org/zsh/
+# - https://grml.org/zsh/zsh-lovers.html
 #
 # Skip all this for non-interactive shells
 [[ -z "$PS1" ]] && return
