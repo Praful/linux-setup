@@ -23,8 +23,9 @@ function h() {
 }
 
 # start comparison as background so that terminal doesn't wait for process to end
+# Putting the command in brackets suppresses the process id and exit message
 function b() {
-    bcompare "$@" &
+    (bcompare "$@" &)
 }
 
 export PATH=$PATH:~/data/scripts/linux
