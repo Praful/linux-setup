@@ -124,7 +124,11 @@ setopt sharehistory
 setopt extendedhistory
 
 # Ref: https://linux.die.net/man/1/zshoptions
-setopt extendedglob nomatch notify autopushd pushdignoredups globcomplete nomenucomplete nocaseglob
+setopt extendedglob nomatch notify globcomplete nomenucomplete nocaseglob
+
+# directory stack: see https://zsh.sourceforge.io/Intro/intro_6.html#SEC6
+# these make cd behave live pushd/popd; 
+setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups 
 
 # Prompts for confirmation after 'rm *' etc
 # Helps avoid mistakes like 'rm * o' when 'rm *.o' was intended

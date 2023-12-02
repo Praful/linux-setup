@@ -28,6 +28,11 @@ function b() {
     (bcompare "$@" &)
 }
 
+function src() {
+    source ~/.commonrc
+    source ~/.zshrc
+}
+
 export PATH=$PATH:~/data/scripts/linux
 
 # History Options
@@ -39,6 +44,7 @@ export HISTFILE=~/.histfile
 export HISTSIZE=25000
 export SAVEHIST=9000
 export RIPGREP_CONFIG_PATH=~/.config/.ripgreprc
+export DIRSTACKSIZE=20
 
 # Ignore some controlling instructions
 export HISTIGNORE="[   ]*:&:bg:fg:exit:ls:[bf]g:reset:clear:cd:cd ..:cd..:u:uu:uuu"
@@ -152,6 +158,8 @@ alias uuuu='cd ../../../..'
 #correct typo
 alias cd..='cd ..'
 
+# list directory stack
+alias ds='dirs -v'
 
 alias ai='sudo apt -y install'
 alias ar='sudo apt remove'
