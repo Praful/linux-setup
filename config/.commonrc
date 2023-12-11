@@ -224,6 +224,7 @@ alias pu='pushd'
 alias po='popd'
 
 alias e='gvim --remote-silent'
+alias ee='rfv -d'
 
 # edit and re-read this file
 alias be='$EDITOR ~/.bashrc ; source ~/.bashrc'
