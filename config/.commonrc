@@ -44,7 +44,7 @@ export HISTFILE=~/.histfile
 export HISTSIZE=25000
 export SAVEHIST=9000
 export RIPGREP_CONFIG_PATH=~/.config/.ripgreprc
-export DIRSTACKSIZE=20
+export DIRSTACKSIZE=40
 
 # Ignore some controlling instructions
 export HISTIGNORE="[   ]*:&:bg:fg:exit:ls:[bf]g:reset:clear:cd:cd ..:cd..:u:uu:uuu"
@@ -112,6 +112,7 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
+alias rmd='rm -rf'
 alias mkdir='mkdir -p'
 
 alias ev='env | sort | less'
@@ -131,11 +132,13 @@ alias whence='type -a'                        # where, of a sort
 alias grep='grep --color'                     # show differences in colour
 
 
-if [ -x "$(command -v exa)" ]; then
-  alias d='exa -ahF'
-  alias dl='exa -alhF'
+if [ -x "$(command -v eza)" ]; then
+  alias d='eza -hF'
+  alias da='eza -ahF'
+  alias dl='eza -lhF'
 else
-  alias d='ls -a'
+  alias d='ls'
+  alias da='ls -a'
   alias dl='ls -lrth -a'
 fi
 
