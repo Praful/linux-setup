@@ -75,6 +75,7 @@ export FZF_ALT_C_COMMAND='fd --type d --hidden'
 export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
 
 export DATA='/home/praful/data'
+export D='/home/praful/data'
 
 
 # coloured man pages using bat
