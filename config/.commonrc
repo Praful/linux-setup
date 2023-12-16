@@ -47,7 +47,8 @@ export RIPGREP_CONFIG_PATH=~/.config/.ripgreprc
 export DIRSTACKSIZE=40
 
 # Ignore some controlling instructions
-export HISTIGNORE="[   ]*:&:bg:fg:exit:ls:[bf]g:reset:clear:cd:cd ..:cd..:u:uu:uuu"
+# bash only
+export HISTIGNORE="[   ]*:&:bg:fg:exit:d:da:ls:[bf]g:reset:history:clear:cd:cd ..:cd..:u:uu:uuu"
 
 # Whenever displaying the prompt, write the previous line to disk
 # export PROMPT_COMMAND="history -a"
@@ -220,6 +221,7 @@ alias psa='ps -aef | l'
 alias psg='ps -aef | rg'
 
 # alias h='history'
+alias his='history'
 
 alias pu='pushd'
 alias po='popd'
