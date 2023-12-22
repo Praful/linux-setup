@@ -150,7 +150,7 @@ alias dir='ls --color=auto --format=vertical'
 alias vdir='ls --color=auto --format=long'
 alias ll='ls -l'                              # long list
 alias la='ls -A'                              # all but . and ..
-alias l='ls -CF'                              #
+# alias l='ls -CF'                              #
 alias dv='dirs -v'
 alias ll='ls -alF'
 alias la='ls -A'
@@ -244,7 +244,8 @@ alias pip='python -m pip'
 alias jc='python -m jupyter console'
 alias jcq='python -m jupyter qtconsole &'
 alias py='python3'
-alias ipy='ipython3'
+alias ipy='ptipython'
+# alias ipy='ipython'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
