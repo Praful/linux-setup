@@ -134,7 +134,7 @@ def configure(repl):
     repl.enable_syntax_highlighting = True
 
     # Get into Vi navigation mode at startup
-    repl.vi_start_in_navigation_mode = True
+    repl.vi_start_in_navigation_mode = False
 
     # Preserve last used Vi input mode between main loop iterations
     repl.vi_keep_last_used_mode = False
