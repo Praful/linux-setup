@@ -241,8 +241,8 @@ alias ze='$EDITOR ~/.zshrc ; source ~/.zshrc'
 # jupyter qtconsole.
 # alias jc='python -m jupyter console'
 alias pip='python -m pip'
-alias jc='jupyter console'
-alias jcq='jupyter qtconsole &'
+alias jc='python -m jupyter console'
+alias jcq='python -m jupyter qtconsole &'
 alias py='python3'
 alias ipy='ipython3'
 
@@ -280,7 +280,7 @@ eval "$(pyenv init -)"
 if [ "$(hostname)" = "nexus-mint" ]; then
   pyenv shell 3.11.4
 else
-  pyenv shell 3.11.2
+  pyenv shell 3.11.4
 fi
 
 export NVM_DIR="$HOME/.nvm"
