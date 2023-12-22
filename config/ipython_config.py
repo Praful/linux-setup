@@ -813,6 +813,7 @@ c.TerminalInteractiveShell.editing_mode = 'vi'
 #          :ref:`terminal-shortcuts-list`.
 #  Default: []
 # c.TerminalInteractiveShell.shortcuts = []
+#  c.TerminalInteractiveShell.shortcuts = [{'command': 'IPython:auto_suggest.accept', 'new_keys': ['c-o']}]
 
 ## Show rewritten input, e.g. for autocall.
 #  See also: InteractiveShell.show_rewritten_input
