@@ -80,16 +80,6 @@ function zvm_config() {
 }
 
 # For help, see https://linuxhint.com/ls_colors_bash/
-export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;36:bd=30;46:cd=30;46:su=30'
-export LS_COLORS="${LS_COLORS};41:sg=30;41:tw=30;41:ow=30;41:*.rpm=1;31:*.deb=1;31"
-export LSCOLORS=CxahafafBxagagabababab
-
-export GREP_COLORS LS_COLORS LSCOLORS
-export ZDOTDIR="$HOME/.config/zsh"
-
-# for run-help (key C^X-H)
-export HELPDIR=/usr/share/zsh/help
-
 
 # called by zsh-vi-mode plugin
 function zvm_after_init() {
@@ -97,6 +87,16 @@ function zvm_after_init() {
 }
 
 source ~/.commonrc
+
+export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;36:bd=30;46:cd=30;46:su=30'
+export LS_COLORS="${LS_COLORS};41:sg=30;41:tw=30;41:ow=30;41:*.rpm=1;31:*.deb=1;31"
+export LSCOLORS=CxahafafBxagagabababab
+
+export GREP_COLORS LS_COLORS LSCOLORS
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# for run-help (key C^X-H)
+export HELPDIR=/usr/share/zsh/help
 
 # Clone antidote if necessary.
 [[ -e $ZDOTDIR/.antidote ]] ||

@@ -38,13 +38,15 @@ export PATH=$PATH:~/data/scripts/linux
 # History Options
 # ###############
 
+export XDG_CONFIG_HOME=~/.config
+
 # Don't put duplicate lines in the history.
 export HISTCONTROL="ignoredups"
 export HISTFILE=~/.histfile
 export HISTSIZE=25000
 export SAVEHIST=9000
-export RIPGREP_CONFIG_PATH=~/.config/.ripgreprc
 export DIRSTACKSIZE=40
+export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/.ripgreprc
 
 # Ignore some controlling instructions
 # bash only
