@@ -274,6 +274,13 @@ alias print-fpath='for fp in $fpath; do echo $fp; done; unset fp'
 alias print-path='echo $PATH | tr ":" "\n"'
 alias print-functions='print -l ${(k)functions[(I)[^_]*]} | sort'
 
+# Rip CDs; install docker image first:
+#   docker pull whipperteam/whipper
+alias whipper="docker run -ti --rm --device=/dev/cdrom \
+    --mount type=bind,source=${XDG_CONFIG_HOME}/whipper,target=/home/worker/.config/whipper \
+    --mount type=bind,source=${DATA}/music/rip/output,target=/output \
+    whipperteam/whipper"
+
 # https://github.com/pyenv/pyenv#installation
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"

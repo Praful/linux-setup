@@ -18,8 +18,8 @@ if [ "${PS1-}" ]; then
 fi
 
 # pk added 20231006 =========
-if [[ -O /home/$USER/tmp && -d /home/$USER/tmp ]]; then
-  TMPDIR=/home/$USER/tmp
+if [[ -O /home/$USER/data/temp && -d /home/$USER/data/temp ]]; then
+  TMPDIR=/home/$USER/data/temp
 fi
 TMP=$TMPDIR
 TEMP=$TMPDIR
