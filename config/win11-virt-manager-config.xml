@@ -1,6 +1,6 @@
-<domain type="kvm">
+<domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
   <name>win11</name>
-  <uuid>31e2cd8c-8a86-4622-a4ab-677ff970b312</uuid>
+  <uuid>1d76c3bc-4cdc-4929-b039-fd3723b9e948</uuid>
   <metadata>
     <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
       <libosinfo:os id="http://microsoft.com/win/10"/>
@@ -168,13 +168,10 @@
     <controller type="virtio-serial" index="0">
       <address type="pci" domain="0x0000" bus="0x03" slot="0x00" function="0x0"/>
     </controller>
-    <controller type="scsi" index="0" model="virtio-scsi">
-      <address type="pci" domain="0x0000" bus="0x08" slot="0x00" function="0x0"/>
-    </controller>
     <interface type="user">
       <mac address="52:54:00:f8:36:e8"/>
-      <model type="virtio"/>
-      <address type="pci" domain="0x0000" bus="0x07" slot="0x00" function="0x0"/>
+      <model type="rtl8139"/>
+      <address type="pci" domain="0x0000" bus="0x10" slot="0x01" function="0x0"/>
     </interface>
     <serial type="pty">
       <target type="isa-serial" port="0">
@@ -204,17 +201,14 @@
     </sound>
     <audio id="1" type="spice"/>
     <video>
-      <model type="virtio" heads="1" primary="yes">
-        <acceleration accel3d="yes"/>
-      </model>
+      <model type="virtio" heads="1" primary="yes"/>
       <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x0"/>
     </video>
-    <hostdev mode="subsystem" type="usb" managed="yes">
+    <hostdev mode="subsystem" type="pci" managed="yes">
       <source>
-        <vendor id="0x0b97"/>
-        <product id="0x7772"/>
+        <address domain="0x0000" bus="0x00" slot="0x02" function="0x0"/>
       </source>
-      <address type="usb" bus="0" port="5"/>
+      <address type="pci" domain="0x0000" bus="0x07" slot="0x00" function="0x0"/>
     </hostdev>
     <redirdev bus="usb" type="spicevmc">
       <address type="usb" bus="0" port="2"/>
@@ -224,4 +218,10 @@
     </redirdev>
     <memballoon model="none"/>
   </devices>
+  <qemu:commandline>
+    <qemu:arg value="-set"/>
+    <qemu:arg value="device.hostdev0.x-pci-sub-vendor-id=0x1179"/>
+    <qemu:arg value="-set"/>
+    <qemu:arg value="device.hostdev0.x-pci-sub-device-id=0x0015"/>
+  </qemu:commandline>
 </domain>
