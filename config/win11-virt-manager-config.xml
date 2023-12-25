@@ -21,9 +21,25 @@
       <relaxed state="on"/>
       <vapic state="on"/>
       <spinlocks state="on" retries="8191"/>
+      <vpindex state="on"/>
+      <synic state="on"/>
+      <stimer state="on">
+        <direct state="on"/>
+      </stimer>
+      <reset state="on"/>
+      <vendor_id state="on" value="kaptech"/>
+      <frequencies state="on"/>
+      <reenlightenment state="on"/>
+      <tlbflush state="on"/>
+      <ipi state="on"/>
+      <evmcs state="off"/>
     </hyperv>
+    <kvm>
+      <hidden state="on"/>
+    </kvm>
     <vmport state="off"/>
     <smm state="on"/>
+    <ioapic driver="kvm"/>
   </features>
   <cpu mode="host-passthrough" check="none" migratable="on"/>
   <clock offset="localtime">
@@ -152,10 +168,13 @@
     <controller type="virtio-serial" index="0">
       <address type="pci" domain="0x0000" bus="0x03" slot="0x00" function="0x0"/>
     </controller>
+    <controller type="scsi" index="0" model="virtio-scsi">
+      <address type="pci" domain="0x0000" bus="0x08" slot="0x00" function="0x0"/>
+    </controller>
     <interface type="user">
       <mac address="52:54:00:f8:36:e8"/>
-      <model type="rtl8139"/>
-      <address type="pci" domain="0x0000" bus="0x10" slot="0x01" function="0x0"/>
+      <model type="virtio"/>
+      <address type="pci" domain="0x0000" bus="0x07" slot="0x00" function="0x0"/>
     </interface>
     <serial type="pty">
       <target type="isa-serial" port="0">
@@ -165,15 +184,14 @@
     <console type="pty">
       <target type="serial" port="0"/>
     </console>
-    <channel type="spicevmc">
-      <target type="virtio" name="org.spice-space.webdav.0"/>
-      <address type="virtio-serial" controller="0" bus="0" port="3"/>
-    </channel>
-    <input type="tablet" bus="usb">
-      <address type="usb" bus="0" port="1"/>
-    </input>
     <input type="mouse" bus="ps2"/>
     <input type="keyboard" bus="ps2"/>
+    <input type="mouse" bus="virtio">
+      <address type="pci" domain="0x0000" bus="0x05" slot="0x00" function="0x0"/>
+    </input>
+    <input type="keyboard" bus="virtio">
+      <address type="pci" domain="0x0000" bus="0x06" slot="0x00" function="0x0"/>
+    </input>
     <tpm model="tpm-tis">
       <backend type="emulator" version="2.0"/>
     </tpm>
@@ -186,7 +204,9 @@
     </sound>
     <audio id="1" type="spice"/>
     <video>
-      <model type="virtio" heads="1" primary="yes"/>
+      <model type="virtio" heads="1" primary="yes">
+        <acceleration accel3d="yes"/>
+      </model>
       <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x0"/>
     </video>
     <redirdev bus="usb" type="spicevmc">
@@ -195,8 +215,6 @@
     <redirdev bus="usb" type="spicevmc">
       <address type="usb" bus="0" port="3"/>
     </redirdev>
-    <memballoon model="virtio">
-      <address type="pci" domain="0x0000" bus="0x05" slot="0x00" function="0x0"/>
-    </memballoon>
+    <memballoon model="none"/>
   </devices>
 </domain>
