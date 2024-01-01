@@ -44,7 +44,6 @@ if [[ $SHELL == *"zsh"* ]]; then
   export HISTORY_IGNORE="(d|dl|ls|[bf]g|exit|reset|clear|env|u|uu|uuu|cd|cd ..|cd..)"
 fi
 
-export PATH=~/.nvm/versions/node/v19.5.0/bin:$PATH:~/data/scripts/linux
 
 # History Options
 # ###############
@@ -308,7 +307,13 @@ else
   pyenv shell 3.11.4
 fi
 
-export NVM_DIR="$HOME/.nvm"
-# comment these out since they are slow and we don't use nvm that much
+export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+
+# These are commented out because they slowdown startup and we don't use nvm that much. They
+# also update PATH to include the node location and define the nvm command (which is 
+# not a script). The PATH is updated manually below.
+# If you want to run nvm, uncomment them.
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH=$NVM_DIR/versions/node/v21.5.0/bin:$PATH:~/data/scripts/linux

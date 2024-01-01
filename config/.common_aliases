@@ -207,4 +207,3 @@ alias whipper="docker run -ti --rm --device=/dev/cdrom \
     --mount type=bind,source=${DATA}/music/rip/output,target=/output \
     whipperteam/whipper"
 
-
