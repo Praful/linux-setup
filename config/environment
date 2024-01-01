@@ -1,4 +1,5 @@
-PATH="/home/praful/.pyenv/shims:/home/praful/.pyenv/bin:/home/praful/.nvm/versions/node/v19.5.0/bin:/usr/local/sbin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+# PATH="/home/praful/.pyenv/shims:/home/praful/.pyenv/bin:/home/praful/.nvm/versions/node/v19.5.0/bin:/usr/local/sbin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+PATH="/usr/local/sbin:usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 EDITOR="gvim --remote"
 DATA="/home/praful/data"
 D=$DATA

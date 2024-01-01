@@ -1,0 +1,314 @@
+# PK aliases used by bash and zsh
+# for ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
+
+# see https://unix.stackexchange.com/questions/38172/are-all-bash-scripts-compatible-with-zsh
+# comment out since the emulate is inherited by other functions which won't work if 
+# they're not designed for sh
+# if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
+#
+
+# f [fuzzy pattern]
+# edit (default) or open (ctrl-o) file
+function f() {
+  fzf-tmux --query "$1" --multi --select-1 --exit-0 \
+    --bind "enter:become:$(eval echo "${EDITOR:-vim}") {+}" \
+    --bind "ctrl-o:become:open {+}"
+}
+# in your .bashrc/.zshrc/*rc
+# allows "help cat" instead of "cat --help"
+alias bathelp='bat --plain --language=cmd-help'
+# alias bathelp='bat --plain --language=help'
+function h() {
+    "$@" --help 2>&1 | bathelp
+}
+
+# start comparison as background so that terminal doesn't wait for process to end
+# Putting the command in brackets suppresses the process id and exit message
+function b() {
+    (bcompare "$@" &)
+}
+
+function src() {
+    source ~/.commonrc
+    source ~/.zshrc
+}
+
+export XDG_CONFIG_HOME=~/.config
+
+# zsh env variables
+if [[ $SHELL == *"zsh"* ]]; then
+  export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# for run-help (key C^X-H)
+  export HELPDIR=/usr/share/zsh/help
+  export HISTORY_IGNORE="(d|dl|ls|[bf]g|exit|reset|clear|env|u|uu|uuu|cd|cd ..|cd..)"
+fi
+
+export PATH=~/.nvm/versions/node/v19.5.0/bin:$PATH:~/data/scripts/linux
+
+# History Options
+# ###############
+
+# Don't put duplicate lines in the history.
+export HISTCONTROL="ignoredups"
+export HISTFILE=~/.histfile
+export HISTSIZE=25000
+export SAVEHIST=9000
+export DIRSTACKSIZE=40
+
+export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/.ripgreprc
+
+# Ignore some controlling instructions
+# bash only
+export HISTIGNORE="[   ]*:&:bg:fg:exit:d:da:ls:[bf]g:reset:history:clear:cd:cd ..:cd..:u:uu:uuu"
+
+# Whenever displaying the prompt, write the previous line to disk
+# export PROMPT_COMMAND="history -a"
+#
+# will display only the current directory as the title - used for tabs in kitty
+# PROMPT_COMMAND='echo -ne "\033]0;$(basename ${PWD})\007"'
+# To see the last two directories inside the path
+
+export EDITOR="gvim --remote"
+export VISUAL=$EDITOR
+export PAGER="less"
+
+export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;36:bd=30;46:cd=30;46:su=30'
+export LS_COLORS="${LS_COLORS};41:sg=30;41:tw=30;41:ow=30;41:*.rpm=1;31:*.deb=1;31"
+export LSCOLORS=CxahafafBxagagabababab
+export GREP_COLORS LS_COLORS LSCOLORS
+
+export INPUTRC="~/.inputrc"
+# export LESS="--no-init --ignore-case --quit-if-one-screen --force --quit-on-intr"
+export LESS="--no-init --ignore-case --quit-if-one-screen --force --raw-control-chars"
+# export FZF_DEFAULT_COMMAND="rg --files --hidden . 2> nul"
+# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden'
+export FZF_CTRL_T_COMMAND='fd'
+export FZF_ALT_C_COMMAND='fd --type d --hidden'
+# export FZF_DEFAULT_COMMAND='find . '
+# export FZF_DEFAULT_OPTS="--exact --ansi"
+# don't show left gutter and highlight line in blue instead of showing arrow in gutter
+# export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,gutter:-1 --color=hl:#A6E22E"
+export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
+
+export DATA='/home/praful/data'
+export D='/home/praful/data'
+
+
+# coloured man pages using bat
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'
+  --header 'Press ctrl-/ to preview file'"
+
+# key ? to toggle small preview window to see the full command
+# key # to copy the command into clipboard using xsel
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind '?:toggle-preview'
+  --bind '#:execute-silent(echo -n {2..} | xsel --input)+abort'
+  --color header:italic
+  --header 'Press ? to see long command; # to copy command into clipboard'"
+
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+
+# Aliases
+# #######
+
+# Some example alias instructions
+# If these are enabled they will be used instead of any instructions
+# they may mask.  For example, alias rm='rm -i' will mask the rm
+# application.  To override the alias instruction use a \ before, ie
+# \rm will call the real rm not the alias.
+
+# Play safe by performing these interactively 
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+alias rmd='rm -rf'
+alias mkdir='mkdir -p'
+
+alias ev='env | sort | less'
+# Default to human readable figures
+alias df='df -h'
+# unalias to compare sizes by running something like:
+#   du --max-depth=2 --exclude=data |gvim -
+# alias du='du -h'
+alias df2='df --exclude-type=tmpfs --exclude-type=devtmpfs --exclude-type=squashfs'
+
+alias 'dus=du -msc * .*(N) | sort -n'
+alias 'dus.=du -msc .* | sort -n'
+
+# Misc :)
+alias less='less -r'                          # raw control characters
+alias whence='type -a'                        # where, of a sort
+alias grep='grep --color'                     # show differences in colour
+
+
+if [ -x "$(command -v eza)" ]; then
+  alias d='eza -hF'
+  alias da='eza -ahF'
+  alias dl='eza -lhF'
+else
+  alias d='ls'
+  alias da='ls -a'
+  alias dl='ls -lrth -a'
+fi
+
+# Some shortcuts for different directory listings
+alias ls='ls -hF --color=tty'                 # classify files in colour
+alias dir='ls --color=auto --format=vertical'
+alias vdir='ls --color=auto --format=long'
+alias ll='ls -l'                              # long list
+alias la='ls -A'                              # all but . and ..
+# alias l='ls -CF'                              #
+alias dv='dirs -v'
+alias ll='ls -alF'
+alias la='ls -A'
+
+alias u='cd ..'
+alias uu='cd ../..'
+alias uuu='cd ../../..'
+alias uuuu='cd ../../../..'
+
+#correct typo
+alias cd..='cd ..'
+
+# list directory stack
+alias ds='dirs -v'
+
+alias ai='sudo apt -y install'
+alias ar='sudo apt remove'
+#
+# equivalents to mac clipboard copy/paste
+# these work on primary selection (see man xsel)
+# https://ostechnix.com/how-to-use-pbcopy-and-pbpaste-commands-on-linux/
+alias pbcopy='xsel --input'
+alias pbpaste='xsel --output'
+
+#PK ---------------------
+
+#alias ls='ls -G'
+alias g='grep -i -E --colour --devices=skip --exclude-dir=.git'
+# alias t='less -i'
+alias t='bat'
+alias l='less -i'
+
+alias cdd='cd $DATA'
+alias cdb='cd $DATA/blog'
+alias cdl='cd $DATA/logs'
+alias cdm='cd /mnt'
+alias cdo='cd $DATA/dev/open-source'
+alias cdp='cd $DATA/dev/projects'
+alias cdpl='cd $DATA/dev/projects/linux-setup'
+alias cdpv='cd $DATA/dev/projects/vim-config'
+alias cds='cd $DATA/scripts/linux'
+alias cdss='cd $DATA/settings'
+alias cdt='cd $DATA/temp'
+alias cdw='cd ~/Downloads'
+
+# tar
+alias tarls="tar -tvf"
+alias untar="tar -xf"
+
+# find
+# used to be aliased to fd and ff but now fd is aliased to fdfind
+# alias findd='find . -type d -iregex'
+# alias findf='find . -type f -iregex'
+alias fd='fdfind --hidden --exclude "**/mnt/**"'
+
+# disk usage
+alias biggest='du -s ./* | sort -nr | awk '\''{print $2}'\'' | xargs du -sh'
+alias dux='du -x --max-depth=1 2>/dev/null | sort -n'
+alias dud='du -d 1 -h 2>/dev/null' #dir sizes
+alias dus='du -sh *' #summary
+
+# also install duf for a prettier version of df
+
+#alias dl='ls -l'
+#alias ps='ps -Au | l'
+
+alias psa='ps -aef | l'
+alias psg='ps -aef | rg'
+
+# alias h='history'
+alias his='history'
+
+alias pu='pushd'
+alias po='popd'
+
+alias e='gvim --remote-silent'
+alias ee='rfv -d'
+
+# edit and re-read this file
+alias be='$EDITOR ~/.bashrc ; source ~/.bashrc'
+alias ze='$EDITOR ~/.zshrc ; source ~/.zshrc'
+
+# the "python -m" ensures we're running the user default we've setup via pyenv
+# rather than the one referenced in the script via "#!/usr/bin/python3", which is 
+# the system default. This worked for 'jupyter console' but not 'jupyter qtconsole'. 
+# The solution is to edit ~/.local/share/jupyter/kernels/python3/kernel.json and 
+# change "python" to eg python3.11. This will work for ipython3, jupyter console and
+# jupyter qtconsole.
+# alias jc='python -m jupyter console'
+alias pip='python -m pip'
+alias jc='python -m jupyter console'
+alias jcq='python -m jupyter qtconsole &'
+alias py='python3'
+alias ipy='ptipython'
+# alias ipy='ipython'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+
+# git
+alias gs='git status' # (NB overriding GhostScript)
+alias gsl='git status | l' # (NB overriding GhostScript)
+alias gits='git -c color.status=always status | less'
+alias gitls='git ls-files' #all files, including staged
+alias gitlsc='git ls-tree --full-tree -r --name-only HEAD' #committed files
+alias gitlog='git log --graph --abbrev-commit --pretty=oneline --decorate'
+
+# for data dir (on another drive)that is mounted at ~/data, if we are in ~/data,
+# gitls won't look across file systems since ~/data is on one drive and ~/ is on 
+# another drive. This fixes issue:
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+# uncomment for diagnostic output
+# export GIT_TRACE=1
+
+# echo things
+alias print-fpath='for fp in $fpath; do echo $fp; done; unset fp'
+alias print-path='echo $PATH | tr ":" "\n"'
+alias print-functions='print -l ${(k)functions[(I)[^_]*]} | sort'
+
+# Rip CDs; install docker image first:
+#   docker pull whipperteam/whipper
+alias whipper="docker run -ti --rm --device=/dev/cdrom \
+    --mount type=bind,source=${XDG_CONFIG_HOME}/whipper,target=/home/worker/.config/whipper \
+    --mount type=bind,source=${DATA}/music/rip/output,target=/output \
+    whipperteam/whipper"
+
+# https://github.com/pyenv/pyenv#installation
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+# Load pyenv-virtualenv automatically by adding the following to ~/.bashrc:
+# eval "$(pyenv virtualenv-init -)"
+if [ "$(hostname)" = "nexus-mint" ]; then
+  pyenv shell 3.11.4
+else
+  pyenv shell 3.11.4
+fi
+
+export NVM_DIR="$HOME/.nvm"
+# comment these out since they are slow and we don't use nvm that much
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

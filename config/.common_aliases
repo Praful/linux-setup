@@ -1,0 +1,210 @@
+
+# PK aliases used by bash and zsh
+# for ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
+
+# see https://unix.stackexchange.com/questions/38172/are-all-bash-scripts-compatible-with-zsh
+# comment out since the emulate is inherited by other functions which won't work if 
+# they're not designed for sh
+# if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
+#
+
+# f [fuzzy pattern]
+# edit (default) or open (ctrl-o) file
+function f() {
+  fzf-tmux --query "$1" --multi --select-1 --exit-0 \
+    --bind "enter:become:$(eval echo "${EDITOR:-vim}") {+}" \
+    --bind "ctrl-o:become:open {+}"
+}
+# in your .bashrc/.zshrc/*rc
+# allows "help cat" instead of "cat --help"
+alias bathelp='bat --plain --language=cmd-help'
+# alias bathelp='bat --plain --language=help'
+function h() {
+    "$@" --help 2>&1 | bathelp
+}
+
+# start comparison as background so that terminal doesn't wait for process to end
+# Putting the command in brackets suppresses the process id and exit message
+function b() {
+    (bcompare "$@" &)
+}
+
+function src() {
+    source ~/.commonrc
+    source ~/.zshrc
+}
+
+
+# Some example alias instructions
+# If these are enabled they will be used instead of any instructions
+# they may mask.  For example, alias rm='rm -i' will mask the rm
+# application.  To override the alias instruction use a \ before, ie
+# \rm will call the real rm not the alias.
+
+# Play safe by performing these interactively 
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+alias rmd='rm -rf'
+alias mkdir='mkdir -p'
+
+alias ev='env | sort | less'
+# Default to human readable figures
+alias df='df -h'
+# unalias to compare sizes by running something like:
+#   du --max-depth=2 --exclude=data |gvim -
+# alias du='du -h'
+alias df2='df --exclude-type=tmpfs --exclude-type=devtmpfs --exclude-type=squashfs'
+
+alias 'dus=du -msc * .*(N) | sort -n'
+alias 'dus.=du -msc .* | sort -n'
+
+# Misc :)
+alias less='less -r'                          # raw control characters
+alias whence='type -a'                        # where, of a sort
+alias grep='grep --color'                     # show differences in colour
+
+
+if [ -x "$(command -v eza)" ]; then
+  alias d='eza -hF'
+  alias da='eza -ahF'
+  alias dl='eza -lhF'
+else
+  alias d='ls'
+  alias da='ls -a'
+  alias dl='ls -lrth -a'
+fi
+
+# Some shortcuts for different directory listings
+alias ls='ls -hF --color=tty'                 # classify files in colour
+alias dir='ls --color=auto --format=vertical'
+alias vdir='ls --color=auto --format=long'
+alias ll='ls -l'                              # long list
+alias la='ls -A'                              # all but . and ..
+# alias l='ls -CF'                              #
+alias dv='dirs -v'
+alias ll='ls -alF'
+alias la='ls -A'
+
+alias u='cd ..'
+alias uu='cd ../..'
+alias uuu='cd ../../..'
+alias uuuu='cd ../../../..'
+
+#correct typo
+alias cd..='cd ..'
+
+# list directory stack
+alias ds='dirs -v'
+
+alias ai='sudo apt -y install'
+alias ar='sudo apt remove'
+#
+# equivalents to mac clipboard copy/paste
+# these work on primary selection (see man xsel)
+# https://ostechnix.com/how-to-use-pbcopy-and-pbpaste-commands-on-linux/
+alias pbcopy='xsel --input'
+alias pbpaste='xsel --output'
+
+#PK ---------------------
+
+#alias ls='ls -G'
+alias g='grep -i -E --colour --devices=skip --exclude-dir=.git'
+# alias t='less -i'
+alias t='bat'
+alias l='less -i'
+
+alias cdd='cd $DATA'
+alias cdb='cd $DATA/blog'
+alias cdl='cd $DATA/logs'
+alias cdm='cd /mnt'
+alias cdo='cd $DATA/dev/open-source'
+alias cdp='cd $DATA/dev/projects'
+alias cdpl='cd $DATA/dev/projects/linux-setup'
+alias cdpv='cd $DATA/dev/projects/vim-config'
+alias cds='cd $DATA/scripts/linux'
+alias cdss='cd $DATA/settings'
+alias cdt='cd $DATA/temp'
+alias cdw='cd ~/Downloads'
+
+# tar
+alias tarls="tar -tvf"
+alias untar="tar -xf"
+
+# find
+# used to be aliased to fd and ff but now fd is aliased to fdfind
+# alias findd='find . -type d -iregex'
+# alias findf='find . -type f -iregex'
+alias fd='fdfind --hidden --exclude "**/mnt/**"'
+
+# disk usage
+alias biggest='du -s ./* | sort -nr | awk '\''{print $2}'\'' | xargs du -sh'
+alias dux='du -x --max-depth=1 2>/dev/null | sort -n'
+alias dud='du -d 1 -h 2>/dev/null' #dir sizes
+alias dus='du -sh *' #summary
+
+# also install duf for a prettier version of df
+
+#alias dl='ls -l'
+#alias ps='ps -Au | l'
+
+alias psa='ps -aef | l'
+alias psg='ps -aef | rg'
+
+# alias h='history'
+alias his='history'
+
+alias pu='pushd'
+alias po='popd'
+
+alias e='gvim --remote-silent'
+alias ee='rfv -d'
+
+# edit and re-read this file
+alias be='$EDITOR ~/.bashrc ; source ~/.bashrc'
+alias ze='$EDITOR ~/.zshrc ; source ~/.zshrc'
+
+# https://postgresqlstan.github.io/cli/zsh-run-help/
+# see .zshrc for autoload
+alias hp=run-help
+
+# the "python -m" ensures we're running the user default we've setup via pyenv
+# rather than the one referenced in the script via "#!/usr/bin/python3", which is 
+# the system default. This worked for 'jupyter console' but not 'jupyter qtconsole'. 
+# The solution is to edit ~/.local/share/jupyter/kernels/python3/kernel.json and 
+# change "python" to eg python3.11. This will work for ipython3, jupyter console and
+# jupyter qtconsole.
+# alias jc='python -m jupyter console'
+alias pip='python -m pip'
+alias jc='python -m jupyter console'
+alias jcq='python -m jupyter qtconsole &'
+alias py='python3'
+alias ipy='ptipython'
+# alias ipy='ipython'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# git
+alias gs='git status' # (NB overriding GhostScript)
+alias gsl='git status | l' # (NB overriding GhostScript)
+alias gits='git -c color.status=always status | less'
+alias gitls='git ls-files' #all files, including staged
+alias gitlsc='git ls-tree --full-tree -r --name-only HEAD' #committed files
+alias gitlog='git log --graph --abbrev-commit --pretty=oneline --decorate'
+
+# echo things
+alias print-fpath='for fp in $fpath; do echo $fp; done; unset fp'
+alias print-path='echo $PATH | tr ":" "\n"'
+alias print-functions='print -l ${(k)functions[(I)[^_]*]} | sort'
+
+# Rip CDs; install docker image first:
+#   docker pull whipperteam/whipper
+alias whipper="docker run -ti --rm --device=/dev/cdrom \
+    --mount type=bind,source=${XDG_CONFIG_HOME}/whipper,target=/home/worker/.config/whipper \
+    --mount type=bind,source=${DATA}/music/rip/output,target=/output \
+    whipperteam/whipper"
+
+

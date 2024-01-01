@@ -100,7 +100,7 @@ if [ -f ~/.bash_custom ]; then
     . ~/.bash_custom
 fi
 if [ -f ~/.commonrc ]; then
-    . ~/.commonrc
+    . ~/.common_aliases
 fi
 
 # enable programmable completion features (you don't need to enable

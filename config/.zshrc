@@ -47,7 +47,6 @@ autoload run−help−ip
 autoload run−help−openssl
 autoload run−help−p4
 autoload run−help−sudo
-alias hp=run-help
 
 # press alt-h vim insert mode to get help for command
 # does not work
@@ -86,17 +85,15 @@ function zvm_after_init() {
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
 
-source ~/.commonrc
-
-export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;36:bd=30;46:cd=30;46:su=30'
-export LS_COLORS="${LS_COLORS};41:sg=30;41:tw=30;41:ow=30;41:*.rpm=1;31:*.deb=1;31"
-export LSCOLORS=CxahafafBxagagabababab
-
-export GREP_COLORS LS_COLORS LSCOLORS
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
+# call in .zprofile
+# source ~/.commonrc
+#
+# moved to commenrc
+# export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # for run-help (key C^X-H)
-export HELPDIR=/usr/share/zsh/help
+# export HELPDIR=/usr/share/zsh/help
+
+source ~/.common_aliases
 
 # Clone antidote if necessary.
 [[ -e $ZDOTDIR/.antidote ]] ||
@@ -109,7 +106,7 @@ antidote load
 # https://zsh.sourceforge.io/Doc/Release/Options.html#Description-of-Options
 #
 # Zsh settings for history
-export HISTORY_IGNORE="(d|dl|ls|[bf]g|exit|reset|clear|env|u|uu|uuu|cd|cd ..|cd..)"
+# export HISTORY_IGNORE="(d|dl|ls|[bf]g|exit|reset|clear|env|u|uu|uuu|cd|cd ..|cd..)"
 setopt inc_append_history
 setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
@@ -220,4 +217,4 @@ bindkey '^X0' run-help
 #
 enable-fzf-tab
 
-[ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
+# [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
