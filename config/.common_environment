@@ -29,8 +29,8 @@ function b() {
 }
 
 function src() {
-    source ~/.commonrc
-    source ~/.zshrc
+    source ~/.common_environment
+    source $ZDOTDIR/.zshrc
 }
 
 export XDG_CONFIG_HOME=~/.config

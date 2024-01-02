@@ -99,7 +99,7 @@ eval "$(oh-my-posh init bash --config ~/pk-posh-theme.omp.json)"
 if [ -f ~/.bash_custom ]; then
     . ~/.bash_custom
 fi
-if [ -f ~/.commonrc ]; then
+if [ -f ~/.common_aliases ]; then
     . ~/.common_aliases
 fi
 
@@ -116,4 +116,7 @@ fi
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-. "$HOME/.cargo/env"
+
+if [ -d "$HOME/.cargo" ] ; then
+  . "$HOME/.cargo/env"
+fi
