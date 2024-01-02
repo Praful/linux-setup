@@ -10,13 +10,9 @@ sudo apt install -y liblua5.4-dev
 sudo apt install -y libperl-dev
 sudo apt install -y ruby-dev
 
-mkdir -p ~/data/dev/open-source
-cd ~/data/dev/open-source
+mkdir -p $DATA/dev/open-source
+push $DATA/dev/open-source
 git clone https://github.com/vim/vim.git
-cd vim/src
+popd
 
-# Edit file to enable ruby, python, perl, lua dynamic linking
-vim Makefile
-
-make reconfig
-sudo make install
+source ./update-vim.sh
