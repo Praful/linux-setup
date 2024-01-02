@@ -115,6 +115,7 @@ alias g='grep -i -E --colour --devices=skip --exclude-dir=.git'
 alias t='bat'
 alias l='less -i'
 
+alias cdc='cd $XDG_CONFIG_HOME'
 alias cdd='cd $DATA'
 alias cdb='cd $DATA/blog'
 alias cdl='cd $DATA/logs'
