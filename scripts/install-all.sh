@@ -4,4 +4,6 @@ source ./install-vim-compile-libs.sh
 source ./python-install-libs.sh
 source ./install-brave.sh
 source ./install-vscode.sh
+source ./update-kitty.sh
+
 
