@@ -16,10 +16,11 @@ pip install beautifulsoup4
 pip install requests
 pip install pylint
 pip install seaborn
-
+pip install more-itertools
 pip install autopep8
 # pip install ipython
 pip install jupyter-console
 
 # better version of top
 pip install --user 'glances[all]'
+
