@@ -30,15 +30,15 @@ function b() {
 }
 
 function src() {
-    source ~/.commonrc
-    source ~/.zshrc
+    source ~/.common_environment
+    source $ZDOTDIR/.zshrc
 }
 
 
 # Some example alias instructions
 # If these are enabled they will be used instead of any instructions
 # they may mask.  For example, alias rm='rm -i' will mask the rm
-# application.  To override the alias instruction use a \ before, ie
+# application.  To override the alias instruction use a \ before, eg
 # \rm will call the real rm not the alias.
 
 # Play safe by performing these interactively 
@@ -106,8 +106,6 @@ alias ar='sudo apt remove'
 # https://ostechnix.com/how-to-use-pbcopy-and-pbpaste-commands-on-linux/
 alias pbcopy='xsel --input'
 alias pbpaste='xsel --output'
-
-#PK ---------------------
 
 #alias ls='ls -G'
 alias g='grep -i -E --colour --devices=skip --exclude-dir=.git'
