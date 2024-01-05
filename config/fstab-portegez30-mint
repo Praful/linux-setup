@@ -1,0 +1,8 @@
+# <file system> <mount point> <type> <options> <dump> <pass>
+
+UUID=b91107fd-8128-49c5-a113-f3a1b38e9460	/	ext4	errors=remount-ro	0	1
+UUID=2897bd35-19ef-4e5b-8219-2af521cc928c	/boot	ext4	defaults	0	2
+UUID=38E4-6221	/boot/efi	vfat	umask=0077	0	1
+/dev/mapper/vgmint-swap_1	none	swap	sw	0	0
+/dev/mapper/veracrypt1	/mnt/sd512	ntfs	defaults	0	0
+/swapfile	none	swap	defaults	0	0
