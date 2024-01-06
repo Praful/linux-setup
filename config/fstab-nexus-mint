@@ -1,0 +1,18 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+/dev/mapper/nvme0n1p5_crypt /               ext4    errors=remount-ro 0       1
+# /boot was on /dev/nvme0n1p4 during installation
+UUID=ee57aae6-e463-40f2-ba2a-25a397ebcc5d /boot           ext4    defaults        0       2
+# /boot/efi was on /dev/nvme0n1p1 during installation
+UUID=80AB-5B35  /boot/efi       vfat    umask=0077      0       1
+//app01/backup-ro	/mnt/backup-ro	cifs	credentials=/etc/sambanetwork,uid=praful	0	0
+//app01/public	/mnt/public	cifs	credentials=/etc/sambanetwork,uid=praful	0	0
+/dev/disk/by-uuid/1773fe56-80d5-43ba-b59c-7e57feb2fef2 /media/praful/WD4TB-IN-1-EXT4 auto nosuid,nodev,nofail,x-gvfs-show 0 0
+/media/praful/WD4TB-IN-1-EXT4/data	/home/praful/data	none	bind,nofail	0	0
+/swapfile	none	swap	sw	0	0
+
