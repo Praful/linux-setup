@@ -31,6 +31,7 @@ function b() {
 
 function src() {
     source ~/.common_environment
+    source ~/.common_aliases
     source $ZDOTDIR/.zshrc
 }
 
