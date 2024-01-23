@@ -21,6 +21,8 @@ pip install autopep8
 # pip install ipython
 pip install jupyter-console
 
+pip install ptipython
+
 # better version of top
 pip install --user 'glances[all]'
 
