@@ -21,8 +21,8 @@ cp $DATA/dev/projects/vim-config/Makefile.pk ./Makefile
 
 
 # clean previous build
-sudo make distclean
-sudo make
+make distclean
+make
 sudo make install
 
 popd
