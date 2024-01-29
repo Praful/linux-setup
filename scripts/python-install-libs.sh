@@ -5,24 +5,24 @@ python3 -m ensurepip --default-pip
 # upgrade pip
 python3 -m pip install --upgrade pip
 
-pip install jupyterlab
-pip install pandas
-pip install matplotlib
-pip install scipy
-pip install numpy
-pip install statsmodels
-pip install scikit-learn
-pip install beautifulsoup4
-pip install requests
-pip install pylint
-pip install seaborn
-pip install more-itertools
-pip install autopep8
-# pip install ipython
-pip install jupyter-console
+pip install jupyterlab --upgrade
+pip install pandas --upgrade
+pip install matplotlib --upgrade
+pip install scipy --upgrade
+pip install numpy --upgrade
+pip install statsmodels --upgrade
+pip install scikit-learn --upgrade
+pip install beautifulsoup4 --upgrade
+pip install requests --upgrade
+pip install pylint --upgrade
+pip install seaborn --upgrade
+pip install more-itertools --upgrade
+pip install autopep8 --upgrade
+# pip install ipython --upgrade
+pip install jupyter-console --upgrade
 
-pip install ptipython
+pip install ptipython --upgrade
 
 # better version of top
-pip install --user 'glances[all]'
+pip install --user 'glances[all]' --upgrade
 
