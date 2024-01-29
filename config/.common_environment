@@ -107,7 +107,7 @@ eval "$(pyenv init -)"
 if [ "$(hostname)" = "nexus-mint" ]; then
   pyenv shell 3.11.4
 else
-  pyenv shell 3.11.4
+  pyenv shell 3.12.1
 fi
 
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
