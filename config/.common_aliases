@@ -35,7 +35,12 @@ function src() {
     source $ZDOTDIR/.zshrc
 }
 
-
+# open file in existing gvim instance and move focus to it
+function e() {
+    gvim --remote-silent $@ ; xdotool search --name "/* - GVIM" windowactivate
+}
+# alias e='gvim --remote-silent'
+#
 # Some example alias instructions
 # If these are enabled they will be used instead of any instructions
 # they may mask.  For example, alias rm='rm -i' will mask the rm
@@ -160,7 +165,6 @@ alias his='history'
 alias pu='pushd'
 alias po='popd'
 
-alias e='gvim --remote-silent'
 alias ee='rfv -d'
 
 # edit and re-read this file
