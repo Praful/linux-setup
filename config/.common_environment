@@ -105,7 +105,7 @@ eval "$(pyenv init -)"
 # Load pyenv-virtualenv automatically by adding the following to ~/.bashrc:
 # eval "$(pyenv virtualenv-init -)"
 if [ "$(hostname)" = "nexus-mint" ]; then
-  pyenv shell 3.11.4
+  pyenv shell 3.12.1
 else
   pyenv shell 3.12.1
 fi
