@@ -143,7 +143,8 @@ alias untar="tar -xf"
 # used to be aliased to fd and ff but now fd is aliased to fdfind
 # alias findd='find . -type d -iregex'
 # alias findf='find . -type f -iregex'
-alias fd='fdfind --hidden --exclude "**/mnt/**"'
+# -p regex applies to full path (not just filename or directory)
+alias fd='fdfind -p --hidden --one-file-system'
 
 # disk usage
 alias biggest='du -s ./* | sort -nr | awk '\''{print $2}'\'' | xargs du -sh'
