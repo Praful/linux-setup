@@ -7,6 +7,9 @@
 # <file system> <mount point>   <type>  <options>       <dump>  <pass>
 /dev/mapper/nvme0n1p5_crypt /               ext4    errors=remount-ro 0       1
 # /boot was on /dev/nvme0n1p4 during installation
+
+# 26/2//2024:  original but moved to larger partition below
+# UUID=ee57aae6-e463-40f2-ba2a-25a397ebcc5d /boot           ext4    defaults        0       2
 UUID=ee57aae6-e463-40f2-ba2a-25a397ebcc5d /boot           ext4    defaults        0       2
 # /boot/efi was on /dev/nvme0n1p1 during installation
 UUID=80AB-5B35  /boot/efi       vfat    umask=0077      0       1
