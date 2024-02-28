@@ -113,7 +113,9 @@ setopt hist_reduce_blanks
 setopt hist_verify
 setopt hist_ignore_space #don't include commands starting with space in history file
 setopt nobeep
-setopt correct_all
+# change to correct, which corrects misspelled commands instead of all words on line
+# setopt correct_all
+setopt correct
 
 # one history for all open shells
 setopt sharehistory
