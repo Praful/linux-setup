@@ -20,6 +20,7 @@ pip install more-itertools --upgrade
 pip install autopep8 --upgrade
 # pip install ipython --upgrade
 pip install jupyter-console --upgrade
+pip install networkx --upgrade
 
 pip install ptipython --upgrade
 
