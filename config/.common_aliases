@@ -214,3 +214,18 @@ alias whipper="docker run -ti --rm --device=/dev/cdrom \
     --mount type=bind,source=${DATA}/music/rip/output,target=/output \
     whipperteam/whipper"
 
+# -----------------------------------------
+# This eval doesn't work in .common_environment; place here since .zshrc needs to load it to
+# allow "pyenv shell 3.x.x", etc to work from terminal
+eval "$(pyenv init -)"
+
+# The pyenv lines below work in .common_environment. However, place here to keep in 
+# one place.
+#
+# Load pyenv-virtualenv automatically by adding the following to ~/.bashrc:
+# eval "$(pyenv virtualenv-init -)"
+if [ "$(hostname)" = "nexus-mint" ]; then
+  pyenv shell 3.12.1
+else
+  pyenv shell 3.12.1
+fi
