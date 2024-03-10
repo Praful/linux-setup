@@ -1,6 +1,7 @@
-
-# PK aliases used by bash and zsh
-# for ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
+# Aliases and common setup for zsh and bash. Environment variables are in
+# .common_environment. This file is sourced by ~/.config/zsh/.zshrc and ~/.bashrc
+#
+# For ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
 
 # see https://unix.stackexchange.com/questions/38172/are-all-bash-scripts-compatible-with-zsh
 # comment out since the emulate is inherited by other functions which won't work if 

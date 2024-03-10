@@ -1,5 +1,9 @@
-# PK aliases used by bash and zsh
-# for ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
+# Environment variables used in zsh and bash. For any common setup, including 
+# aliases, use .common_aliases
+#
+# This file is sourced by ~/.profile and ~/.zprofile
+#
+# For ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
 
 # see https://unix.stackexchange.com/questions/38172/are-all-bash-scripts-compatible-with-zsh
 # comment out since the emulate is inherited by other functions which won't work if 
@@ -47,28 +51,26 @@ export EDITOR="gvim --remote"
 export VISUAL=$EDITOR
 export PAGER="less"
 
-export LS_COLORS='di=1;32:ln=1;30;47:so=30;45:pi=30;45:ex=1;36:bd=30;46:cd=30;46:su=30'
+# Using https://geoff.greer.fm/lscolors/
+# use RGB colors eg for directory: di=38;2;<R>;<G>;<B>
+export LS_COLORS='di=38;2;140;188;124:ln=1;30;47:so=30;45:pi=30;45:ex=38;2;255;200;144:bd=30;46:cd=30;46:su=30'
 export LS_COLORS="${LS_COLORS};41:sg=30;41:tw=30;41:ow=30;41:*.rpm=1;31:*.deb=1;31"
 export LSCOLORS=CxahafafBxagagabababab
 export GREP_COLORS LS_COLORS LSCOLORS
 
 export INPUTRC="~/.inputrc"
-# export LESS="--no-init --ignore-case --quit-if-one-screen --force --quit-on-intr"
 export LESS="--no-init --ignore-case --quit-if-one-screen --force --raw-control-chars"
 # export FZF_DEFAULT_COMMAND="rg --files --hidden . 2> nul"
 # export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden'
 export FZF_CTRL_T_COMMAND='fd'
 export FZF_ALT_C_COMMAND='fd --type d --hidden'
-# export FZF_DEFAULT_COMMAND='find . '
-# export FZF_DEFAULT_OPTS="--exact --ansi"
 # don't show left gutter and highlight line in blue instead of showing arrow in gutter
 # export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,gutter:-1 --color=hl:#A6E22E"
 export FZF_DEFAULT_OPTS="--ansi --color=bg+:#005FFF,hl:#FFB700,gutter:-1"
 
 export DATA='/home/praful/data'
 export D='/home/praful/data'
-
 
 # coloured man pages using bat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
