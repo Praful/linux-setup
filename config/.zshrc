@@ -139,6 +139,9 @@ setopt AUTO_CONTINUE
 # Don’t write over existing files with >, use >! instead
 setopt NOCLOBBER
 
+# I have alias d set to use exa. Typing d <TAB> doesn't list directories; this fixes it.
+setopt COMPLETE_ALIASES
+
 # Don't complete with first option: show menu instead to allow to tab through 
 # options.
 # zstyle ':autocomplete:*' widget-style menu-complete
