@@ -1,7 +1,9 @@
 # Environment variables used in zsh and bash. For any common setup, including 
-# aliases, use .common_aliases
+# aliases, use .common_aliases, which is called by .zshrc and .bashrc, which set up 
+# the interactive shell.
 #
-# This file is sourced by ~/.profile and ~/.zprofile
+# This file is sourced by ~/.profile and ~/.zprofile, which set up on the 
+# non-interactive shell. 
 #
 # For ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
 
@@ -100,11 +102,7 @@ export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 # uncomment for diagnostic output
 # export GIT_TRACE=1
 
-# https://github.com/pyenv/pyenv#installation
-# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PYENV_SHELL="zsh"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+source ~/.init_pyenv
 
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 

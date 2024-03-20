@@ -1,5 +1,6 @@
 # Aliases and common setup for zsh and bash. Environment variables are in
-# .common_environment. This file is sourced by ~/.config/zsh/.zshrc and ~/.bashrc
+# .common_environment. This file is sourced by ~/.config/zsh/.zshrc and ~/.bashrc, 
+# which set up the interactive shell.
 #
 # For ideas, see https://github.com/mattmc3/zdotdir/blob/main/conf.d/aliases.zsh
 
@@ -210,23 +211,10 @@ alias print-functions='print -l ${(k)functions[(I)[^_]*]} | sort'
 
 # Rip CDs; install docker image first:
 #   docker pull whipperteam/whipper
-alias whipper="docker run -ti --rm --device=/dev/cdrom \
-    --mount type=bind,source=${XDG_CONFIG_HOME}/whipper,target=/home/worker/.config/whipper \
-    --mount type=bind,source=${DATA}/music/rip/output,target=/output \
-    whipperteam/whipper"
-
-# -----------------------------------------
-# This eval doesn't work in .common_environment; place here since .zshrc needs to load it to
-# allow "pyenv shell 3.x.x", etc to work from terminal
-eval "$(pyenv init -)"
-
-# The pyenv lines below work in .common_environment. However, place here to keep in 
-# one place.
+# alias whipper="docker run -ti --rm --device=/dev/cdrom \
 #
-# Load pyenv-virtualenv automatically by adding the following to ~/.bashrc:
-# eval "$(pyenv virtualenv-init -)"
-if [ "$(hostname)" = "nexus-mint" ]; then
-  pyenv shell 3.12.1
-else
-  pyenv shell 3.12.1
-fi
+    # --mount type=bind,source=${XDG_CONFIG_HOME}/whipper,target=/home/worker/.config/whipper \
+    # --mount type=bind,source=${DATA}/music/rip/output,target=/output \
+    # whipperteam/whipper"
+
+source ~/.init_pyenv
