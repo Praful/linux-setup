@@ -22,6 +22,9 @@ pip install autopep8 --upgrade
 pip install jupyter-console --upgrade
 pip install networkx --upgrade
 
+# used by vim coc plugin for refactoring eg extract method
+pip install rope --upgrade
+
 pip install ptipython --upgrade
 
 # better version of top
