@@ -25,6 +25,9 @@ pip install networkx --upgrade
 # used by vim coc plugin for refactoring eg extract method
 pip install rope --upgrade
 
+# this provides support for heic files and is used by fetch-photos.py
+pip install Pillow-heif --upgrade
+
 pip install ptipython --upgrade
 
 # better version of top
